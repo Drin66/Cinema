@@ -13,7 +13,8 @@ main{
 .sidebar{
     background: #000;
     color: #fff;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     width: 200px;
     transition: all 0.5s;
 }
@@ -21,6 +22,10 @@ main{
     display: flex;
     align-items:center;
     padding:20px 15px;
+    transition: transform 0.3s ease;
+}
+.top_section:hover{
+    transform: scale(1.1);
 }
 .logo{
     font-size: 30px;
@@ -48,4 +53,113 @@ main{
 }
 .icon, .link_text{
     font-size: 20px;
+}
+.delete{
+    padding: 3px 6px;
+    background-color: rgba(250, 83, 83, 0.671);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.delete:hover{
+    transform: scale(1.1);
+}
+.update{
+    padding: 3px 6px;
+    background-color: rgb(79, 240, 20);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.update:hover{
+    transform: scale(1.1);
+}
+.h1-design{
+    padding: 6px 6px;
+    /* width: auto; */
+    background-color: rgba(70, 101, 126, 0.587);
+    border-radius: 15px;
+    border: groove;
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+}
+.users-button{
+    padding: 3px 6px; 
+    background-color:  #000;
+    width: auto;
+    height: 40px;
+    color: lightskyblue;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: larger;
+    font-family: sans-serif;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+.users-button:hover {
+    transform: scale(1.1);
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 10px;
+    padding: 10px;
+}
+input{
+    border: 2px solid lightskyblue;
+    border-radius: 20px;
+    padding: 10px;
+}
+.signupbutton{
+    border: 2px lightskyblue;
+    padding: 10px;
+    color: white;
+    background-color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.mb-3 label{
+    color: rgb(70, 101, 126);
+    font-weight: bold;
+    margin-left: 30%;
+}
+
+/* Per MOVIES */
+.movies-container {
+    display: grid;
+    grid-template-columns: repeat(4, 240px);
+    gap: 20px; 
+    justify-content: center;
+}
+.movie-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: none;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 240px;
+}
+.movie-image {
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+.movie-image:hover {
+    transform: scale(1.1);
+}
+.movie-title {
+    margin: 0; 
+    padding: 5px; 
+}
+.buttons {
+    display: flex;
+    gap: 10px; 
+    margin-top: 10px; 
+    margin-bottom: 30px; 
 }

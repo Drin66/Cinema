@@ -8,6 +8,12 @@ import Events from './pages/Events.jsx';
 import Movies from './pages/Movies.jsx';
 import Product from './pages/Product.jsx';
 import TicketsList from './pages/TicketsList.jsx';
+import Signup from './pages/Signup.jsx';
+import Update from './pages/Update.jsx';
+import Category from './pages/Category.jsx';
+import UpdateCategory from './pages/UpdateCategory.jsx';
+import AddMovie from './pages/AddMovie.jsx';
+import UpdateMovie from './pages/UpdateMovie.jsx';
 
 const App = () => {
   return (
@@ -21,6 +27,12 @@ const App = () => {
           <Route path="/events" element={<Events />} />
           <Route path="/product" element={<Product />} />
           <Route path="/ticketsList" element={<TicketsList />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/update/:id" element={<Update />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/updateCategory/:id" element={<UpdateCategory />} />
+          <Route path="/addmovie" element={<AddMovie />} />
+          <Route path="/updatemovie/:id" element={<UpdateMovie />} />
         </Routes>
       </Sidebar>
     </BrowserRouter>
