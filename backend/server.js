@@ -155,6 +155,68 @@ app.put("/categories/:id", (req,res) => {
     });
 });
 
+
+//per SALLA
+app.get("/Halls", (req,res) => {
+    const q = "SELECT * FROM Halls";
+    db.query(q, (err,data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    });
+});
+
+app.post("/Halls", (req,res) => {
+    const q = "INSERT into Halls (`name`) VALUES (?)";
+    const values = [
+        req.body.name,
+
+    ];
+    db.query(q, values,  (err, data) => {
+                if(err) return res.json(err);
+                return res.json("Hall has been created successfully");
+            });
+});
+
+app.delete("/Halls/:id", (req,res) => {
+    const Id = req.params.id;
+    const q = "DELETE FROM Halls WHERE id = ?";
+    
+    db.query(q, [Id], (err,data) => {
+        if(err) return res.json(err);
+        return res.json("Hall has been deleted successfully.");
+    });
+});
+
+app.get("/Halls/:id", (req, res) => {
+    const Id = req.params.id;
+    const q = "SELECT * FROM `Halls` WHERE `id` = ?";
+    
+    db.query(q, [Id], (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: "Error fetching Hall", details: err });
+        }
+        if (data.length === 0) {
+            return res.status(404).json({ error: "Hall not found::)" });
+        }
+        return res.json(data[0]);
+    });
+});
+
+app.put("/Halls/:id", (req,res) => {
+    const cid = req.params.id;
+    const q = "UPDATE Halls SET `name`=? WHERE id=? ";
+
+    const values = [
+        req.body.name,
+        cid
+    ];
+    
+    db.query(q, values, (err,data) => {
+        if(err) return res.status(500).json({ error: "Error updating Hall", details: err });
+        return res.json("Hall has been updated successfully.");
+    });
+});
+
 //per MOVIES
 
 const storage = multer.diskStorage({
