@@ -14,6 +14,9 @@ import Category from './pages/Category.jsx';
 import UpdateCategory from './pages/UpdateCategory.jsx';
 import AddMovie from './pages/AddMovie.jsx';
 import UpdateMovie from './pages/UpdateMovie.jsx';
+import AddEvent from './pages/AddEvent.jsx';
+import UpdateEvent from './pages/UpdateEvent.jsx';
+import Halls from './pages/Halls.jsx';
 
 const App = () => {
   return (
@@ -33,6 +36,10 @@ const App = () => {
           <Route path="/updateCategory/:id" element={<UpdateCategory />} />
           <Route path="/addmovie" element={<AddMovie />} />
           <Route path="/updatemovie/:id" element={<UpdateMovie />} />
+          <Route path="/addevent" element={<AddEvent />} />
+          <Route path="/updateevent/:id" element={<UpdateEvent />} />
+          <Route path="/Halls" element={<Halls />} />
+
         </Routes>
       </Sidebar>
     </BrowserRouter>
