@@ -94,7 +94,6 @@ app.delete("/users/:id", (req,res) => {
 });
 
 //Per Zhanret
-//PER CATEGORIES
 app.get("/categories", (req,res) => {
     const q = "SELECT * FROM categories";
     db.query(q, (err,data) => {
@@ -154,7 +153,6 @@ app.put("/categories/:id", (req,res) => {
         return res.json("Category has been updated successfully.");
     });
 });
-
 
 //per SALLA
 app.get("/Halls", (req,res) => {
@@ -216,6 +214,7 @@ app.put("/Halls/:id", (req,res) => {
         return res.json("Hall has been updated successfully.");
     });
 });
+
 
 //per MOVIES
 
@@ -299,6 +298,79 @@ app.get("/movies/:id", (req, res) => {
         return res.json(data[0]);
     });
 });
+
+//PER EVENTET
+app.get("/events", (req,res) => {
+    const q = "SELECT * FROM events";
+    db.query(q, (err,data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    });
+});
+
+app.post("/events", uploadM.single('foto'), (req, res) => {
+    const q = "INSERT INTO events (`name`,`foto`, `date`, `endDate`) VALUES (?, ?, ?, ?)";
+    const values = [
+        req.body.name,
+        req.file ? req.file.filename : 'event.jpg',
+        req.body.date,
+        req.body.endDate
+    ];
+    db.query(q, values,  (err, data) => {
+        if (err) return res.status(500).json({ error: "Error creating event", details: err });
+        return res.json("Event created successfully");
+    });
+});
+
+app.delete("/events/:id", (req,res) => {
+    const Id = req.params.id;
+    const q = "DELETE FROM events WHERE id = ?";
+    
+    db.query(q, [Id], (err,data) => {
+        if(err) return res.json(err);
+        return res.json("Event has been deleted successfully.");
+    });
+});
+
+
+app.put("/events/:id", (req, res) => {
+    const cid = req.params.id;
+    const { name, foto, date, endDate } = req.body;
+  
+    if (!name || !date || !endDate) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+  
+    const q = "UPDATE events SET `name`=?, `foto`=?, `date`=?, `endDate`=? WHERE id=?";
+    const values = [name, foto || 'default.jpg', date, endDate, cid];
+  
+    db.query(q, values, (err, data) => {
+      if (err) {
+        console.error("Error updating event:", err);
+        return res.status(500).json({ error: "Error updating event", details: err });
+      }
+      return res.json("Event has been updated successfully.");
+    });
+  });
+  
+
+app.get("/events/:id", (req, res) => {
+    const Id = req.params.id;
+    const q = "SELECT * FROM `events` WHERE `id` = ?";
+    
+    db.query(q, [Id], (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: "Error fetching Event", details: err });
+        }
+        if (data.length === 0) {
+            return res.status(404).json({ error: "Event not found::)" });
+        }
+        return res.json(data[0]);
+    });
+});
+
+
+
 
 app.listen(3002, () => {
     console.log("connected to backend!");
