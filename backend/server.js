@@ -369,6 +369,70 @@ app.get("/events/:id", (req, res) => {
     });
 });
 
+//per Announcments
+app.get("/Announcments", (req,res) => {
+    const q = "SELECT * FROM Announcments";
+    db.query(q, (err,data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    });
+});
+
+app.post("/Announcments", (req,res) => {
+    const q = "INSERT into Announcments (`name`), (`reason`), (`date`) VALUES (?, ?, ?)";
+    const values = [
+        req.body.name,
+        req.body.reason,
+        req.body.date,
+
+    ];
+    db.query(q, values,  (err, data) => {
+                if(err) return res.json(err);
+                return res.json("Announcment has been created successfully");
+            });
+});
+
+app.delete("/Announcments/:id", (req,res) => {
+    const Id = req.params.id;
+    const q = "DELETE FROM Announcments WHERE id = ?";
+    
+    db.query(q, [Id], (err,data) => {
+        if(err) return res.json(err);
+        return res.json("Announcment has been deleted successfully.");
+    });
+});
+
+app.get("/Announcments/:id", (req, res) => {
+    const Id = req.params.id;
+    const q = "SELECT * FROM `Announcments` WHERE `id` = ?";
+    
+    db.query(q, [Id], (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: "Error fetching Announcment", details: err });
+        }
+        if (data.length === 0) {
+            return res.status(404).json({ error: "Announcment not found::)" });
+        }
+        return res.json(data[0]);
+    });
+});
+
+app.put("/Announcments/:id", (req,res) => {
+    const cid = req.params.id;
+    const q = "UPDATE Announcments SET `name`=?, `reason`=?, `date`=?, WHERE id=? ";
+
+    const values = [
+        req.body.name,
+        req.body.reason,
+        req.body.date,
+        cid
+    ];
+    
+    db.query(q, values, (err,data) => {
+        if(err) return res.status(500).json({ error: "Error updating Announcment", details: err });
+        return res.json("Announcment has been updated successfully.");
+    });
+});
 
 
 
