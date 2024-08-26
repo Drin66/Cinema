@@ -6,12 +6,24 @@
 .container{
     display:flex;
 }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #000000;
+    color: #fff;
+    font-size: 16px;
+    line-height: 1.6;
+    background-image: url(backgroundphoto.jpg);
+}
+background-image{
+    filter: blur(5px);
+}
 main{
     width: 100%;
     padding: 20px;
 }
 .sidebar{
-    background: #000;
+    background: #000000;
     color: #fff;
     min-height: 100vh;
     height: auto;
@@ -65,7 +77,7 @@ main{
 }
 .update{
     padding: 3px 6px;
-    background-color: rgb(79, 240, 20);
+    background-color: rgb(145, 212, 121);
     cursor: pointer;
     transition: transform 0.3s ease;
 }
@@ -106,14 +118,16 @@ main{
     gap: 5px;
     border-radius: 10px;
     padding: 10px;
+    background-color: transparent;
+    background-image: transparent;
 }
 input{
-    border: 2px solid lightskyblue;
+    border: 2px solid rgb(135, 229, 250);
     border-radius: 20px;
     padding: 10px;
 }
 .signupbutton{
-    border: 2px lightskyblue;
+    border: 2px rgb(135, 229, 250);
     padding: 10px;
     color: white;
     background-color: #000;
@@ -163,3 +177,119 @@ input{
     margin-top: 10px; 
     margin-bottom: 30px; 
 }
+.container{
+    display:flex;
+    margin: 20px;
+}
+
+.sidebar{
+    background: linear-gradient(135deg, #4c0b0b, #972d27);
+    color: #fff;
+    min-height: 100vh;
+    width: 200px;
+    transition: width 0.5s ease;
+    padding: 10px;
+}
+
+.sidebar:hover {
+    width: 220px;
+}
+.top_section{
+    display: flex;
+    align-items: center;
+    padding: 20px 15px;
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.logo{
+    font-size: 35px;
+    font-weight: bold;
+    color: lightskyblue;
+}
+.link{
+    display: flex;
+    color: #ccc;
+    padding: 10px 15px;
+    gap: 15px;
+    transition: background 0.3s, color 0.3s;
+    border-radius: 5px;
+}
+
+.link:hover{
+    background: lightskyblue;
+    color: #000;
+    box-shadow: 0 0 10px lightskyblue;
+}
+.users-button, .signupbutton {
+    padding: 10px 20px;
+    background-color: #333;
+    color: lightskyblue;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.users-button:hover, .signupbutton:hover {
+    background-color: lightskyblue;
+    color: #000;
+    transform: scale(1.1);
+}
+.movies-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px; 
+    justify-content: center;
+    padding: 20px;
+}
+
+.movie-item {
+    background-color: #222;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.movie-image {
+    border-radius: 10px 10px 0 0;
+    transition: transform 0.3s ease;
+}
+
+.movie-image:hover {
+    transform: scale(1.1);
+}
+
+.movie-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin: 10px 0;
+}
+input {
+    border: 2px solid lightskyblue;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+    border-color: lightskyblue;
+    box-shadow: 0 0 8px lightskyblue;
+}
+
+.form {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+

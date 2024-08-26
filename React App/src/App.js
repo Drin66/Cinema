@@ -17,6 +17,7 @@ import UpdateMovie from './pages/UpdateMovie.jsx';
 import AddEvent from './pages/AddEvent.jsx';
 import UpdateEvent from './pages/UpdateEvent.jsx';
 import Halls from './pages/Halls.jsx';
+import Announcments from './pages/Announcments.jsx';
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/addevent" element={<AddEvent />} />
           <Route path="/updateevent/:id" element={<UpdateEvent />} />
           <Route path="/Halls" element={<Halls />} />
+          <Route path="/announcments" element={<Announcments />} />
 
         </Routes>
       </Sidebar>
