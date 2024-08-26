@@ -40,9 +40,9 @@ const Users = () => {
     <div>
       <h1 className='h1-design' style={{ marginLeft:"35%" }}>Cinema Users Dashboard</h1>
       <center>
-        <table style={{ boxShadow: '30px 15px 50px', marginTop: '2%', fontSize: '20px', fontFamily: 'sans-serif' }} border="1">
+        <table style={{  marginTop: '2%', fontSize: '20px', fontFamily: 'sans-serif' }} border="1">
           <thead>
-            <tr style={{ backgroundColor: "#000",color: "#fff"}} >
+            <tr style={{ backgroundColor: 'black',color: "#fff"}} >
               <th>Id</th>
               <th>Name</th>
               <th>Surname</th>

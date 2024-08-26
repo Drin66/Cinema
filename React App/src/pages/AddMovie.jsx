@@ -38,9 +38,9 @@ const AddMovie = () => {
   };
 
   return (
-    <div className="form">
+    <div className="form" style={{ backgroundColor: "transparent"}}>
       <h1 className="h1-prod">Add New Movie</h1><br/>
-      <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='emri'>Name:</label>
+      <label style={{fontWeight: 'bold'}} htmlFor='emri'>Name:</label>
       <input
         type="text"
         placeholder="Movie name"
@@ -49,7 +49,7 @@ const AddMovie = () => {
       /><br/><br/>
       <button className="signupbutton" onClick={handleClick}>Add</button><br/>
       {error && "Something went wrong!"}
-      <Link to="/movies">Back to Movies</Link>
+      <Link to="/movies" style={{ color: "white"}}>Back to Movies</Link>
     </div>
   );
 };

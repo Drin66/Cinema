@@ -43,7 +43,7 @@ const Signup = () => {
   console.log(user);
   return (
     <div className='lgnn'>
-      <div className='form'><br/>
+      <div className='form' style={{ backgroundColor: "transparent"}}><br/>
         <h1 className='h1-design'>Sign Up Below</h1><br/>
         <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='emri'>Name:</label>
         <input type="text" placeholder='name' onChange={handleChange} name="name" /><br/><br/>
