@@ -8,6 +8,7 @@ import {
     FaShoppingBag,
     FaThList,
     FaFilm,
+    FaBullhorn,
     // FaSignInAlt,
     // FaUserPlus 
 }from "react-icons/fa";
@@ -33,6 +34,11 @@ const Sidebar = ({children}) => {
             path:"/events",
             name:"Events",
             icon:<FaRegChartBar/>
+        },
+        {
+            path:"/announcments",
+            name:"Announcments",
+            icon:<FaBullhorn/>
         },
         {
             path:"/movies",
