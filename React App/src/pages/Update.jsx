@@ -5,12 +5,6 @@ import axios from "axios";
 
 const Update = () => {
   const [user, setUser] = useState(null);
-  //   name:"",
-  //   surname:"",
-  //   email:"",
-  //   username:"",
-  //   password:"",
-  // });
 
   const navigate = useNavigate();
   const location = useLocation();
