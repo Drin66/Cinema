@@ -6,7 +6,6 @@
 .container{
     display:flex;
 }
-
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #000000;
@@ -23,7 +22,7 @@ main{
     padding: 20px;
 }
 .sidebar{
-    background: #000000;
+    background: #000;
     color: #fff;
     min-height: 100vh;
     height: auto;
@@ -77,7 +76,7 @@ main{
 }
 .update{
     padding: 3px 6px;
-    background-color: rgb(145, 212, 121);
+    background-color: rgb(79, 240, 20);
     cursor: pointer;
     transition: transform 0.3s ease;
 }
@@ -93,6 +92,18 @@ main{
     display: inline-block;
     background-color: #000;
     color: #fff;
+}
+.delete-movie{
+    transition: transform 0.3s ease;
+}
+.delete-movie:hover{
+    transform: scale(1.5);
+}
+.update-movie{
+    transition: transform 0.3s ease;
+}
+.update-movie:hover{
+    transform: scale(1.5);
 }
 .users-button{
     padding: 3px 6px; 
@@ -122,7 +133,7 @@ main{
     background-image: transparent;
 }
 input{
-    border: 2px solid rgb(135, 229, 250);
+    border: 2px solid lightskyblue;
     border-radius: 20px;
     padding: 10px;
 }
@@ -181,7 +192,6 @@ input{
     display:flex;
     margin: 20px;
 }
-
 .sidebar{
     background: linear-gradient(135deg, #4c0b0b, #972d27);
     color: #fff;
@@ -201,7 +211,6 @@ input{
     transition: transform 0.3s ease;
     margin-bottom: 20px;
 }
-
 .logo{
     font-size: 35px;
     font-weight: bold;
@@ -280,16 +289,26 @@ input {
     color: #fff;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-
 input:focus {
     border-color: lightskyblue;
     box-shadow: 0 0 8px lightskyblue;
 }
-
+.dropdown-style {
+    border: 2px solid lightskyblue;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .dropdown-style:focus {
+    border-color: deepskyblue; /* Optional: Change border color on focus */
+  }
+  
 .form {
     background-color: #222;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
