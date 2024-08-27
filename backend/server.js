@@ -247,15 +247,19 @@ app.get("/movies", (req,res) => {
 });
 
 app.post("/movies", uploadM.single('foto'), (req, res) => {
-    const q = "INSERT INTO movies (`emri`,`foto`) VALUES (?, 'foto.jpg')";
+    const q = "INSERT INTO movies (`emri`, `foto`, `category`) VALUES (?, ?, ?)";
     const values = [
         req.body.emri,
+        req.file ? req.file.filename : 'foto.jpg', 
+        req.body.category,
     ];
-    db.query(q, values,  (err, data) => {
+    
+    db.query(q, values, (err, data) => {
         if (err) return res.status(500).json({ error: "Error creating movie", details: err });
-        return res.json("Movies created successfully");
+        return res.json("Movie created successfully");
     });
 });
+
 
 
 app.delete("/movies/:id", (req, res) => {
@@ -270,11 +274,12 @@ app.delete("/movies/:id", (req, res) => {
 
 app.put("/movies/:id", (req, res) => {
     const produktId = req.params.id;
-    const q = "UPDATE movies SET `emri`=?, `foto`=? WHERE id=? ";
+    const q = "UPDATE movies SET `emri`=?, `foto`=?, `category`=? WHERE id=? ";
 
     const values = [
         req.body.emri,
         req.body.foto,
+        req.body.category,
         produktId
     ];
 
@@ -369,7 +374,7 @@ app.get("/events/:id", (req, res) => {
     });
 });
 
-//per Announcments
+//Per Announcments
 app.get("/Announcments", (req,res) => {
     const q = "SELECT * FROM Announcments";
     db.query(q, (err,data) => {
@@ -395,7 +400,7 @@ app.post("/Announcments", (req,res) => {
 app.delete("/Announcments/:id", (req,res) => {
     const Id = req.params.id;
     const q = "DELETE FROM Announcments WHERE id = ?";
-    
+
     db.query(q, [Id], (err,data) => {
         if(err) return res.json(err);
         return res.json("Announcment has been deleted successfully.");
@@ -405,7 +410,7 @@ app.delete("/Announcments/:id", (req,res) => {
 app.get("/Announcments/:id", (req, res) => {
     const Id = req.params.id;
     const q = "SELECT * FROM `Announcments` WHERE `id` = ?";
-    
+
     db.query(q, [Id], (err, data) => {
         if (err) {
             return res.status(500).json({ error: "Error fetching Announcment", details: err });
@@ -427,12 +432,13 @@ app.put("/Announcments/:id", (req,res) => {
         req.body.date,
         cid
     ];
-    
+
     db.query(q, values, (err,data) => {
         if(err) return res.status(500).json({ error: "Error updating Announcment", details: err });
         return res.json("Announcment has been updated successfully.");
     });
 });
+
 
 
 
