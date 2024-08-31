@@ -18,6 +18,13 @@ import AddEvent from './pages/AddEvent.jsx';
 import UpdateEvent from './pages/UpdateEvent.jsx';
 import Halls from './pages/Halls.jsx';
 import Announcments from './pages/Announcments.jsx';
+import Login from './pages/Login.jsx';
+import AddAnnouncment from './pages/AddAnnouncment.jsx';
+import UpdateAnnouncment from './pages/UpdateAnnouncment.jsx';
+import AddHall from './pages/AddHall.jsx';
+import UpdateHall from './pages/UpdateHall.jsx';
+
+
 
 const App = () => {
   return (
@@ -41,6 +48,11 @@ const App = () => {
           <Route path="/updateevent/:id" element={<UpdateEvent />} />
           <Route path="/Halls" element={<Halls />} />
           <Route path="/announcments" element={<Announcments />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/addannouncment" element={<AddAnnouncment />} />
+          <Route path="/updateannouncment/:id" element={<UpdateAnnouncment />} />
+          <Route path="/addhall" element={<AddHall />} />
+          <Route path="/updatehall/:id" element={<UpdateHall />} />
 
         </Routes>
       </Sidebar>

@@ -137,6 +137,17 @@ input{
     border-radius: 20px;
     padding: 10px;
 }
+textarea {
+    border: 2px solid lightskyblue;
+    border-radius: 20px;
+    padding: 10px;
+    width: 100%;
+    resize: none;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-size: 14px; 
+    background-color: #333;
+}
 .signupbutton{
     border: 2px rgb(135, 229, 250);
     padding: 10px;
@@ -311,4 +322,14 @@ input:focus {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.lgn{
+    align-items: center;
+    margin-left: 40%;
+}
+.mb-3{
+margin-right: 80%;
+}
+.mb-3 label{
+    margin-left: 47%;
 }
