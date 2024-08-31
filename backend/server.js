@@ -26,6 +26,41 @@ app.get("/", (req, res) => {
     res.send("<h1>hello this is the backend</h1>");
 });
 
+//Per LogIn
+// app.post("/login", (req, res) => {
+//     // const username=req.body.username;
+//     // const password=req.body.password;
+
+//     const q = "SELECT * FROM user WHERE username = ? AND password = ?";
+//     // const values = [
+//     //     req.body.username,
+//     //     req.body.password
+//     // ]
+//     db.query(q, [req.body.username, req.body.password], (err, data) => {
+//     // db.query(q, [values], (err, data) => {
+//         if(err) return res.json("login failed(Error)");
+//         if(data.length > 0){
+//             return res.json("Login successfully");
+//         } else {
+//             return res.json("No such data in the database");
+//         }
+        
+//     });
+// });
+app.post("/login", (req, res) => {
+    const q = "SELECT * FROM user WHERE email = ? AND password = ?";
+    db.query(q, [req.body.email, req.body.password], (err, data) => {
+        if (err) return res.json("login failed(Error)");
+        
+        if (data.length > 0) {
+            return res.json("Login successfully");
+        } else {
+            return res.json("No such data in the database");
+        }
+    });
+});
+
+
 //per users
 app.get("/users", (req,res) => {
     const q = "SELECT * FROM user";
@@ -156,7 +191,7 @@ app.put("/categories/:id", (req,res) => {
 
 //per SALLA
 app.get("/Halls", (req,res) => {
-    const q = "SELECT * FROM Halls";
+    const q = "SELECT * FROM halls";
     db.query(q, (err,data) => {
         if(err) return res.json(err);
         return res.json(data);
@@ -164,9 +199,11 @@ app.get("/Halls", (req,res) => {
 });
 
 app.post("/Halls", (req,res) => {
-    const q = "INSERT into Halls (`name`) VALUES (?)";
+    const q = "INSERT into halls (`name`, `movie_name`, `capacity`) VALUES (?, ?, ?)";
     const values = [
         req.body.name,
+        req.body.movie_name,
+        req.body.capacity,
 
     ];
     db.query(q, values,  (err, data) => {
@@ -177,7 +214,7 @@ app.post("/Halls", (req,res) => {
 
 app.delete("/Halls/:id", (req,res) => {
     const Id = req.params.id;
-    const q = "DELETE FROM Halls WHERE id = ?";
+    const q = "DELETE FROM halls WHERE id = ?";
     
     db.query(q, [Id], (err,data) => {
         if(err) return res.json(err);
@@ -187,7 +224,7 @@ app.delete("/Halls/:id", (req,res) => {
 
 app.get("/Halls/:id", (req, res) => {
     const Id = req.params.id;
-    const q = "SELECT * FROM `Halls` WHERE `id` = ?";
+    const q = "SELECT * FROM `halls` WHERE `id` = ?";
     
     db.query(q, [Id], (err, data) => {
         if (err) {
@@ -202,10 +239,12 @@ app.get("/Halls/:id", (req, res) => {
 
 app.put("/Halls/:id", (req,res) => {
     const cid = req.params.id;
-    const q = "UPDATE Halls SET `name`=? WHERE id=? ";
+    const q = "UPDATE halls SET `name`=?, `movie_name`=?, `capacity`=? WHERE id=? ";
 
     const values = [
         req.body.name,
+        req.body.movie_name,
+        req.body.capacity,
         cid
     ];
     
@@ -384,7 +423,7 @@ app.get("/Announcments", (req,res) => {
 });
 
 app.post("/Announcments", (req,res) => {
-    const q = "INSERT into Announcments (`name`), (`reason`), (`date`) VALUES (?, ?, ?)";
+    const q = "INSERT into Announcments (`name`, `reason`, `date`) VALUES (?, ?, ?)";
     const values = [
         req.body.name,
         req.body.reason,
@@ -422,22 +461,23 @@ app.get("/Announcments/:id", (req, res) => {
     });
 });
 
-app.put("/Announcments/:id", (req,res) => {
+app.put("/Announcments/:id", (req, res) => {
     const cid = req.params.id;
-    const q = "UPDATE Announcments SET `name`=?, `reason`=?, `date`=?, WHERE id=? ";
+    const q = "UPDATE Announcments SET `name`=?, `reason`=?, `date`=? WHERE id=? ";
 
     const values = [
         req.body.name,
         req.body.reason,
-        req.body.date,
+        req.body.date.split("T")[0],
         cid
     ];
 
-    db.query(q, values, (err,data) => {
-        if(err) return res.status(500).json({ error: "Error updating Announcment", details: err });
+    db.query(q, values, (err, data) => {
+        if (err) return res.status(500).json({ error: "Error updating Announcment", details: err });
         return res.json("Announcment has been updated successfully.");
     });
 });
+
 
 
 
