@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-    // FaTh,
+    FaTh,
     FaBars,
     FaUserAlt,
     FaRegChartBar,
@@ -9,7 +9,7 @@ import {
     FaThList,
     FaFilm,
     FaBullhorn,
-    FaSignInAlt,
+    FaMapMarkerAlt,
     // FaSignInAlt,
     // FaUserPlus 
 }from "react-icons/fa";
@@ -21,11 +21,11 @@ const Sidebar = ({children}) => {
     const[isOpen ,setIsOpen] = useState(false);
     const toggle = () => setIsOpen (!isOpen);
     const menuItem=[
-        // {
-        //     path:"/",
-        //     name:"Dashboard",
-        //     icon:<FaTh/>
-        // },
+        {
+            path:"/Location",
+            name:"Location",
+            icon:<FaMapMarkerAlt/>
+        },
         {
             path:"/user",
             name:"User",
@@ -55,11 +55,6 @@ const Sidebar = ({children}) => {
             path:"/ticketsList",
             name:"Tickets List",
             icon:<FaThList/>
-        },
-        {
-            path:"/login",
-            name:"Log In",
-            icon:<FaSignInAlt />
         },
     ]
     return (
