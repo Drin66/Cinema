@@ -29,6 +29,10 @@ const Movies = () => {
     }
   };
 
+  // const handleRefresh = () => {
+  //   window.location.reload(); // Reloads the current page
+  // };
+
   return (
     <div>
       <h1 className='h1-design' style={{marginLeft:'35%', marginRight:'15%', textAlign: 'center'}}>Cinema Movies Dashboard</h1><br /><br />
@@ -37,10 +41,9 @@ const Movies = () => {
           <div className="movie-item" key={movie.id}>
             {movie.foto && <img src={`http://localhost:3002/images/${movie.foto}`} alt="" className="movie-image" />}
             <h2 className="movie-title">{movie.emri}</h2>
-            <p className="movie-title" style={{fontSize:"15px"}}>{movie.category}</p>
             <div className="buttons">
-              <button className="delete-movie" onClick={() => handleDelete(movie.id)} style={{marginLeft:'10%'}}>🗑️</button>
-              <button className='update-movie'><Link to={`/updatemovie/${movie.id}`}>🔄</Link></button>
+              <button className="delete-product" onClick={() => handleDelete(movie.id)} style={{marginLeft:'10%'}}>🗑️</button>
+              <button className='update-product'><Link to={`/updatemovie/${movie.id}`}>🔄</Link></button>
             </div>
           </div>
         ))}

@@ -53,8 +53,8 @@ const Announcments = () => {
               <tr key={Announcment.id}>
                 <td>{Announcment.id}</td>
                 <td>{Announcment.name}</td>
-                <td className='update'><Link to={`/updateAnnouncment/${Announcment.id}`}>:arrows_counterclockwise:Update</Link></td>
-                <td className='delete' onClick={() => handleDelete(Announcment.id)}>:heavy_multiplication_x:Delete</td>
+                <td className='update'><Link to={`/updateAnnouncment/${Announcment.id}`}>🔄Update</Link></td>
+                <td className='delete' onClick={() => handleDelete(Announcment.id)}>✖️Delete</td>
               </tr>
             ))}
           </tbody>

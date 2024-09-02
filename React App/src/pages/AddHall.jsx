@@ -23,10 +23,10 @@ const AddHall = () => {
         console.error("Error fetching movies:", error);
       }
     };
-  
+
     fetchMovies();
   }, []);
-  
+
 
   const handleChange = (e) => {
     setHall(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -47,7 +47,7 @@ const AddHall = () => {
     <div className='lgnn'>
       <div className='form'><br/>
         <h1 className='h1-design'>Add Hall Below</h1><br/>
-        
+
         <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='name'>Name:</label>
         <input 
           type="text" 
@@ -55,7 +55,7 @@ const AddHall = () => {
           onChange={handleChange} 
           name="name" 
         /><br/><br/>
-        
+
         <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='movie_name'>Movie:</label>
         <select
           name="movie_name"
@@ -79,7 +79,7 @@ const AddHall = () => {
           onChange={handleChange} 
           name="capacity" 
         /><br/><br/>
-        
+
         <button className='signupbutton' onClick={handleClick}>Add</button><br/>
         {error && "Something went wrong!"}
         <Link to="/Halls" style={{ color: "white"}}>Back to Halls</Link>

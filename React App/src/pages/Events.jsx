@@ -39,8 +39,8 @@ const Events = () => {
             <h2 className="movie-title">{event.name}</h2>
             <h4 className="movie-title">{new Date(event.date).toLocaleDateString('en-GB')} - {new Date(event.endDate).toLocaleDateString('en-GB')}</h4>
             <div className="buttons">
-              <button className="delete-movie" onClick={() => handleDelete(event.id)} style={{marginLeft:'10%'}}>🗑️</button>
-              <button className='update-movie'><Link to={`/updateevent/${event.id}`}>🔄</Link></button>
+              <button className="delete-product" onClick={() => handleDelete(event.id)} style={{marginLeft:'10%'}}>🗑️</button>
+              <button className='update-product'><Link to={`/updateevent/${event.id}`}>🔄</Link></button>
             </div>
           </div>
         ))}
