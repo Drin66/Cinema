@@ -23,6 +23,8 @@ import AddAnnouncment from './pages/AddAnnouncment.jsx';
 import UpdateAnnouncment from './pages/UpdateAnnouncment.jsx';
 import AddHall from './pages/AddHall.jsx';
 import UpdateHall from './pages/UpdateHall.jsx';
+import AddTicket from './pages/AddTicket.jsx';
+import UpdateTicket from './pages/UpdateTicket.jsx';
 
 
 
@@ -53,6 +55,8 @@ const App = () => {
           <Route path="/updateannouncment/:id" element={<UpdateAnnouncment />} />
           <Route path="/addhall" element={<AddHall />} />
           <Route path="/updatehall/:id" element={<UpdateHall />} />
+          <Route path="/addticket" element={<AddTicket />} />
+          <Route path="/updateticket/:id" element={<UpdateTicket />} />
 
         </Routes>
       </Sidebar>
