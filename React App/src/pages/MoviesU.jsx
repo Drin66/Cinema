@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const Movies = () => {
+const MoviesU = () => {
   const [Movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -54,4 +54,4 @@ const Movies = () => {
 //   );
 };
 
-export default Movies;
+export default MoviesU;

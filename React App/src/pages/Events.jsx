@@ -45,7 +45,29 @@ const Events = () => {
           </div>
         ))}
       </div>
-      <button className='users-button' style={{marginLeft:'45%'}}><Link to="/addevent" style={{color:"#fff"}}>➕Add a new Event</Link></button><br /><br /><br />
+      {/* <button className='users-button' style={{marginLeft:'45%'}}><Link to="/addevent" style={{color:"#fff"}}>➕Add a new Event</Link></button><br /><br /><br /> */}
+      <div style={{ textAlign: 'center', marginTop: '20px' }}>
+  <button className='users-button' style={{ 
+    padding: '12px 24px', 
+    backgroundColor: '#9ddcdc', 
+    border: 'none', 
+    color: '#fff', 
+    borderRadius: '5px', 
+    fontSize: '16px', 
+    cursor: 'pointer', 
+    display: 'inline-block',
+    textAlign: 'center'
+  }}>
+    <Link to="/addevent" style={{ 
+      textDecoration: 'none', 
+      color: '#fff', 
+      fontWeight: 'bold' 
+    }}>
+      ➕ Add a New Event
+    </Link>
+  </button>
+</div>
+
     </div>
   );
 };

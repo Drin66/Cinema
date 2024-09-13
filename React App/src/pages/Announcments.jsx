@@ -37,31 +37,96 @@ const Announcments = () => {
 
   return (
     <div>
-      <h1 className='h1-design' style={{ marginLeft:'42%' }} >Announcments Dashboard</h1>
-      <center>
-        <table style={{ marginTop: '2%', fontSize: '20px', fontFamily: 'sans-serif' }} border="1">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Update</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Announcments.map(Announcment => (
-              <tr key={Announcment.id}>
-                <td>{Announcment.id}</td>
-                <td>{Announcment.name}</td>
-                <td className='update'><Link to={`/updateAnnouncment/${Announcment.id}`}>🔄Update</Link></td>
-                <td className='delete' onClick={() => handleDelete(Announcment.id)}>✖️Delete</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </center>
-      <br /><br />
-      <button className='users-button' style={{ marginLeft:'45%'}}><Link to="/addAnnouncment" style={{ color: "#fff"}}>Add new Announcment</Link></button><br /><br /><br />
+      <div style={{ padding: '1%', marginLeft:'5px'}}>
+  <h1 className="h1-design" style={{ textAlign: 'center', fontSize: '24px', color: 'white', marginBottom: '20px', marginLeft: '35%' }}>
+    Announcements Dashboard
+  </h1>
+  
+  <center>
+    <table style={{ 
+        width: '100%', 
+      margin: '10px auto', 
+      borderCollapse: 'collapse', 
+      fontSize: '18px', 
+      fontFamily: 'Arial, sans-serif', 
+      backgroundColor: '#fff', 
+      border: '1px solid #ddd',
+      boxShadow: '0 0 10px rgba(0,0,0,0.1)', 
+      // borderRadius:'20%',
+      // border: '2px'
+    }}>
+      <thead>
+        <tr style={{ 
+          backgroundColor: '#20615b', 
+          color: '#fff', 
+          textAlign: 'center'
+        }}>
+          <th style={{ padding: '12px', borderBottom: '2px solid #ddd' }}>Id</th>
+          <th style={{ padding: '12px', borderBottom: '2px solid #ddd' }}>Name</th>
+          <th style={{ padding: '12px', borderBottom: '2px solid #ddd' }}>Reason</th>
+          <th style={{ padding: '12px', borderBottom: '2px solid #ddd' }}>Date</th>
+          <th style={{ padding: '12px', borderBottom: '2px solid #ddd' }}>Update</th>
+          <th style={{ padding: '12px', borderBottom: '2px solid #ddd' }}>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {Announcments.map(Announcment => (
+          <tr key={Announcment.id} style={{ textAlign: 'center', backgroundColor: Announcment.id % 2 === 0 ? '#761a1a' : '#761a1a' }}>
+            <td style={{ padding: '12px' }}>{Announcment.id}</td>
+            <td style={{ padding: '12px' }}>{Announcment.name}</td>
+            <td style={{ padding: '12px' }}>{Announcment.reason}</td>
+            <td style={{ padding: '12px' }}>{new Date(Announcment.date).toLocaleDateString('en-GB')}</td>
+            <td style={{ padding: '12px', textAlign: 'center' }}>
+              <Link to={`/updateannouncment/${Announcment.id}`} style={{ color: '#bef2ff', fontWeight: 'bold', textDecoration: 'none' }}>🔄 Update</Link>
+            </td>
+            <td style={{ padding: '12px', textAlign: 'center' }}>
+              <button 
+                onClick={() => handleDelete(Announcment.id)} 
+                style={{
+                  backgroundColor: '#dc3545', 
+                  color: '#fff', 
+                   border: 'none', 
+                   borderRadius: '5px', 
+                   padding: '6px 12px', 
+                   fontSize: '16px', 
+                  cursor: 'pointer', 
+                   transition: 'background-color 0.3s ease'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#c82333'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#dc3545'}
+              >
+                🗑️ Delete
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </center>
+
+  <div style={{ textAlign: 'center', marginTop: '30px' }}>
+    <Link to="/addAnnouncment" style={{ textDecoration: 'none' }}>
+      <button className="signupbutton" style={{ 
+        backgroundColor: '#9ddcdc', 
+        color: '#fff', 
+        border: 'none', 
+        borderRadius: '5px', 
+        padding: '10px 20px', 
+        fontSize: '18px', 
+        cursor: 'pointer', 
+        transition: 'background-color 0.3s ease'
+      }} 
+      onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#3a9679'}
+      onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#3a9679'}
+      >
+        ➕ Add New Announcement
+      </button>
+    </Link>
+  </div>
+</div>
+   
+   
+   
     </div>
   );
 };

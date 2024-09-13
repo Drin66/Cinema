@@ -35,33 +35,43 @@ const AddEvent = () => {
   };
 
   return (
-    <div className="form">
-      <h1 className="h1-prod">Add New Event</h1><br/>
-      <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='name'>Name:</label>
-      <input
-        type="text"
-        placeholder="Event name"
-        name="name"
-        onChange={handleChange}
-      /><br/><br/>
-      <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='date'>Start Date:</label>
-      <input
-        type="date"
-        placeholder="Event start date"
-        name="startDate"
-        onChange={handleChange}
-      /><br/><br/>
-      <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='date'>End Date:</label>
-      <input
-        type="date"
-        placeholder="Event end date"
-        name="endDate"
-        onChange={handleChange}
-      /><br/><br/>
-      <button className="signupbutton" onClick={handleClick}>Add</button><br/>
-      {error && "Something went wrong!"}
-      <Link to="/events">Back to Events</Link>
-    </div>
+    <div className="form" style={{ padding: '40px', borderRadius: '8px', width: '400px', border: '2px solid white', color: 'white', margin: 'auto', textAlign: 'center' }}>
+    <h1 className="h1-prod" style={{background:'#20615b', padding: '7px',textAlign: 'center', fontSize: '24px', color: 'white',  marginBottom: '20px', border: '3px solid white', borderRadius: '8px' }}>Add New Event</h1><br/>
+  
+    <label htmlFor='name' style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold', color: 'white' }}>Name:</label>
+    <input
+      type="text"
+      placeholder="Event name"
+      name="name"
+      onChange={handleChange}
+      style={{ width: '100%', padding: '12px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px' }}
+    /><br/><br/>
+    
+    <label htmlFor='startDate' style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold', color: 'white' }}>Start Date:</label>
+    <input
+      type="date"
+      placeholder="Event start date"
+      name="startDate"
+      onChange={handleChange}
+      style={{ width: '100%', padding: '12px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px' }}
+    /><br/><br/>
+    
+    <label htmlFor='endDate' style={{ display: 'block', marginBottom: '10px', fontWeight: 'bold', color: 'white' }}>End Date:</label>
+    <input
+      type="date"
+      placeholder="Event end date"
+      name="endDate"
+      onChange={handleChange}
+      style={{ width: '100%', padding: '12px', marginBottom: '20px', border: '1px solid #ccc', borderRadius: '5px', fontSize: '16px' }}
+    /><br/><br/>
+    
+    <button className="signupbutton" onClick={handleClick} style={{ width: '100%', padding: '12px', backgroundColor: '#9ddcdc', color: '#fff', borderRadius: '5px', border: 'none', fontSize: '16px', cursor: 'pointer' }}>Add</button><br/>
+    
+    {error && <p style={{ color: 'red', marginTop: '10px' }}>Something went wrong!</p>}
+    
+    <Link to="/events" style={{ color:'#9ddcdc', display: 'block', marginTop: '20px', color: 'white', textDecoration: 'underline' }}>Back to Events</Link>
+  </div>
+  
   );
 };
 

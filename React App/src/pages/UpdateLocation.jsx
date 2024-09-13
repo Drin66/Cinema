@@ -8,7 +8,7 @@ const UpdateLocation = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const id = location.pathname.split("/")[2];
-    
+
     useEffect(() => {
         const fetchLocation = async () => {
             try {

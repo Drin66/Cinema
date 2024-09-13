@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const Announcments = () => {
+const AnnouncmentsU = () => {
   const [Announcments, setAnnouncments] = useState([]);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ const Announcments = () => {
       try {
         const res = await axios.get("http://localhost:3002/Announcments");
         console.log("Fetched Announcments:", res.data);
-        
+
         if (Array.isArray(res.data)) {
             setAnnouncments(res.data);
         } else {
@@ -66,4 +66,4 @@ const Announcments = () => {
 //   );
  }
 
-export default Announcments;
+export default AnnouncmentsU;

@@ -10,7 +10,7 @@ const Location = () => {
       try {
         const res = await axios.get("http://localhost:3002/location");
         console.log("Fetched location:", res.data);
-        
+
         if (Array.isArray(res.data)) {
             setlocation(res.data);
         } else {
@@ -36,34 +36,48 @@ const Location = () => {
   };
 
   return (
-    <div>
-      <h1 className='h1-design' style={{ marginLeft:'38.5%' }} >location Dashboard</h1>
-      <center>
-        <table style={{ marginTop: '2%', fontSize: '20px', fontFamily: 'sans-serif' }} border="1">
-          <thead>
-            <tr style={{marginLeft:"50%"}}>
-              {/* <th>Id</th> */}
-              <th>Location</th>
-              <th>Update</th>
-              <th>Delete</th>
+    <div style={{ padding: '1%', marginLeft:'5px' }}>
+    <h1 className="h1-design" style={{textAlign: 'center', fontSize: '24px', color: 'white', marginBottom: '20px', marginLeft: '35%' }}>Location Dashboard</h1>
+    
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <table style={{ width: '80%', borderCollapse: 'collapse', fontSize: '16px', fontFamily: 'Arial, sans-serif', backgroundColor: '#761a1a', border: '1px solid #ddd', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+        <thead>
+          <tr style={{  backgroundColor: '#20615b', 
+          color: '#fff', 
+          textAlign: 'center' }}>
+            <th style={{ padding: '1rem' }}>Location</th>
+            <th style={{ padding: '1rem' }}>Update</th>
+            <th style={{ padding: '1rem' }}>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {location.map(loc => (
+            <tr key={loc.id} style={{ borderBottom: '1px solid #ddd' }}>
+              <td style={{ padding: '1rem' }}>{loc.name}</td>
+              <td style={{ textAlign: 'center' }}>
+                <Link to={`/updatelocation/${loc.id}`} style={{ color: '#007bff', textDecoration: 'none' }}>🔄 Update</Link>
+              </td>
+              <td style={{ textAlign: 'center', cursor: 'pointer', color: '#dc3545' }} onClick={() => handleDelete(loc.id)}>
+                ✖️ Delete
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {location.map(location => (
-              <tr key={location.id}>
-                {/* <td>{location.id}</td> */}
-                <td>{location.name}</td>
-                <td className='update'><Link to={`/updatelocation/${location.id}`}>🔄Update</Link></td>
-                <td className='delete' onClick={() => handleDelete(location.id)}>✖️Delete</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </center>
-      <br /><br />
-      <button className='users-button' style={{ marginLeft:'42.5%'}}><Link to="/addlocation" style={{ color: "#fff"}}>➕Add new location</Link></button><br /><br /><br />
-      <Link to="/movies" style={{ marginLeft:'47%', color: "#000"}}>Back to Movies</Link><br /><br /><br />
+          ))}
+        </tbody>
+      </table>
     </div>
+    
+    <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+      <Link to="/addlocation" style={{ display: 'inline-block', padding: '0.75rem 1.5rem', borderRadius: '4px', backgroundColor: '#9ddcdc', color: '#fff', textDecoration: 'none', fontSize: '1rem' }}>
+        ➕ Add New Location
+      </Link>
+    </div>
+    
+    <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+      <Link to="/movies" style={{ color: '#007bff', textDecoration: 'none', fontSize: '1rem' }}>
+        Back to Movies
+      </Link>
+    </div>
+  </div>
   );
 };
 

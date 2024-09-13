@@ -27,32 +27,58 @@ const AddAnnouncment = () => {
   
   console.log(announcment);
   return (
-    <div className='lgnn'>
-      <div className='form'><br/>
-        <h1 className='h1-design'>Add Announcment Below</h1><br/>
-        <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='name'>Name:</label>
-        <input type="text" placeholder='name' onChange={handleChange} name="name"/><br/><br/>
-        {/* <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='reason'>Reason:</label>
-        <input type="text" placeholder='reason' onChange={handleChange} name="reason"/><br/><br/> */}
-        <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='reason'>Reason:</label>
+    <div className='lgnn' style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+    <div className='form' style={{ backgroundColor: 'transparent', padding: '20px', borderRadius: '8px', border: '2px solid #46817E' }}>
+        <h1 className='h1-design' style={{ fontSize: '20px', color: '#46817E', textAlign: 'center', marginBottom: '20px' }}>Add Announcement Below</h1>
+        
+        <label style={{ color: '#46817E', fontWeight: 'bold', display: 'block', marginBottom: '5px' }} htmlFor='name'>Name:</label>
+        <input 
+            type="text" 
+            placeholder='Enter name' 
+            onChange={handleChange} 
+            name="name" 
+            style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #46817E', marginBottom: '20px' }}
+        />
+
+        <label style={{ color: '#46817E', fontWeight: 'bold', display: 'block', marginBottom: '5px' }} htmlFor='reason'>Reason:</label>
         <textarea 
             placeholder='Please provide a detailed reason' 
             onChange={handleChange} 
             name="reason" 
             rows="4" 
-            style={{width: '100%', resize: 'none'}}
+            style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #46817E', resize: 'none', marginBottom: '20px' }}
         ></textarea>
-        <br/><br/>
-        <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='date'>End Date:</label>
-      <input
-        type="date"
-        placeholder="Announcment date"
-        name="date"
-        onChange={handleChange}
-      /><br/><br/>
-        <button className='signupbutton' onClick={handleClick} >Add</button>
-      </div>
+
+        <label style={{ color: '#46817E', fontWeight: 'bold', display: 'block', marginBottom: '5px' }} htmlFor='date'>End Date:</label>
+        <input
+            type="date"
+            placeholder="Select end date"
+            name="date"
+            onChange={handleChange}
+            style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #46817E', marginBottom: '20px' }}
+        />
+
+        <button 
+            className='signupbutton' 
+            onClick={handleClick} 
+            style={{ 
+                backgroundColor: '#46817E', 
+                color: '#fff', 
+                padding: '10px 20px', 
+                borderRadius: '5px', 
+                border: 'none', 
+                fontSize: '16px', 
+                cursor: 'pointer', 
+                width: '100%' 
+            }}
+            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#5fa4a3'}
+            onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#46817E'}
+        >
+            Add
+        </button>
     </div>
+</div>
+
   );
 };
 

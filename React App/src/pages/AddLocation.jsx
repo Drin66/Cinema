@@ -22,17 +22,32 @@ const AddLocation = () => {
       console.error("Error creating Location:", err);
     }
   };
-  
+
   console.log(Location);
   return (
-    <div className='lgnn'>
-      <div className='form'><br/>
-        <h1 className='h1-design'>Add Location Below</h1><br/>
-        <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='name'>Name:</label>
-        <input type="text" placeholder='name' onChange={handleChange} name="name"/><br/><br/>
-        <button className='signupbutton' onClick={handleClick} >Add</button>
-      </div>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh' }}>
+    <div className="form" style={{ padding: '2rem', borderRadius: '8px', border: '2px solid #ccc', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', width: '100%', maxWidth: '400px' }}>
+      <h1 className="h1-design" style={{ textAlign: 'center', marginBottom: '2rem', color: 'white', backgroundColor:'#347474' }}>Add Location Below</h1>
+      
+      <label htmlFor="name" style={{fontSize:'20px', display: 'block', marginBottom: '0.5rem', color: 'rgb(70, 101, 126)', fontWeight: 'bold' }}>Name:</label>
+      <input
+        type="text"
+        id="name"
+        placeholder="Enter location name"
+        onChange={handleChange}
+        name="name"
+        style={{fontSize:'20px', width: '100%', padding: '0.75rem', borderRadius: '4px', border: '1px solid #ddd', marginBottom: '1.5rem' }}
+      />
+      
+      <button
+        type="button"
+        onClick={handleClick}
+        style={{ width: '100%', padding: '12px', backgroundColor: '#93e4c1', color: '#fff', borderRadius: '5px', border: 'none', fontSize: '16px', cursor: 'pointer' }}
+      >
+        Add
+      </button>
     </div>
+  </div>
   );
 };
 

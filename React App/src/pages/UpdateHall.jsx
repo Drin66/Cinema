@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 
-
 const UpdateHall = () => {
   const [hall, setHall] = useState(null);
   const [movies, setMovies] = useState([]); // State to hold movies
@@ -19,7 +18,7 @@ const UpdateHall = () => {
         console.error("Error fetching hall:", error);
       }
     };
-
+  
     const fetchMovies = async () => {
       try {
         const response = await axios.get("http://localhost:3002/movies"); 
@@ -57,7 +56,7 @@ const UpdateHall = () => {
   return (
     <div className="form">
       <h1 className="h1-design">Update the Hall</h1><br />
-
+      
       <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='name'>Name:</label>
       <input
         type="text"
@@ -66,7 +65,7 @@ const UpdateHall = () => {
         value={hall.name}
         onChange={handleChange}
       /><br /><br />
-
+      
       <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='movie_name'>Movie:</label>
       <select
         name="movie_name"
@@ -91,7 +90,7 @@ const UpdateHall = () => {
         value={hall.capacity}
         onChange={handleChange}
       /><br /><br />
-
+      
       <button className="signupbutton" onClick={handleClick} style={{color:"#fff"}}>Update</button><br/>
       <Link to="/Halls" style={{color:"#FFF"}}>Back to Halls</Link>
     </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const Category = () => {
+const CategoryU = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ const Category = () => {
       try {
         const res = await axios.get("http://localhost:3002/categories");
         console.log("Fetched categories:", res.data);
-        
+
         if (Array.isArray(res.data)) {
             setCategories(res.data);
         } else {
@@ -67,4 +67,4 @@ const Category = () => {
 //   );
 };
 
-export default Category;
+export default CategoryU;
