@@ -1,65 +1,197 @@
-import express from'express';
-import cors from'cors';
-import mysql from'mysql';
-// import bcrypt from "bcrypt";
+import express from 'express';
+import cors from 'cors';
+import mysql from 'mysql';
 import multer from "multer";
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import session from "express-session";
 import cookieParser from "cookie-parser";
-import bodyParser from 'body-parser';
 
 const app = express();
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
-app.use(cors({
-    origin: ["http://localhost:3000/login"],
-    methods: ["POST", "GET"],
-    credentials: true
-}));
 app.use(cookieParser());
-app.use(bodyParser.json());
 
+// Configure session middleware
 app.use(session({
-    secret: "secret",
+    secret: "your-session-secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: false,
-        maxAge: 1000 * 60 * 60 * 24
+        secure: false, // Set to true if you're using HTTPS
+        maxAge: 1000 * 60 * 60 * 24, // 24 hours
     }
-}))
+}));
+
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
 
 app.use('/images', express.static('uploads'));
 
 const db = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"",
-    database:"cinemaa"
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "cinemaa"
 });
 
+const jwtSecret = 'your-secret-key'; // Change this to your secret key
+
+// Middleware to verify JWT token
+const verifyJWT = (req, res, next) => {
+    const token = req.cookies.token; // Use cookies to store token
+
+    if (!token) {
+        return res.status(403).json({ auth: false, message: "No token provided" });
+    } else {
+        jwt.verify(token, jwtSecret, (err, decoded) => {
+            if (err) {
+                return res.status(500).json({ auth: false, message: "Failed to authenticate token" });
+            } else {
+                req.userId = decoded.userId;
+                next();
+            }
+        });
+    }
+};
+
+// Authentication route
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Query to fetch user by email
+        const q = "SELECT * FROM user WHERE email = ?";
+        db.query(q, [email], async (err, data) => {
+            if (err) return res.status(500).json({ error: "Server error", details: err });
+
+            console.log("Database response:", data); // Debugging line
+
+            const user = data[0];
+
+            if (!user) {
+                return res.status(401).json({ message: 'Invalid email or password' });
+            }
+
+            const passwordMatches = bcrypt.compareSync(password, user.password);
+            if (!passwordMatches) {
+                return res.status(401).json({ message: 'Invalid email or password' });
+            }
+
+            // Generate JWT token
+            const token = jwt.sign({ userId: user.id }, jwtSecret, { expiresIn: '24h' });
+
+            // Set token in cookie
+            res.cookie('token', token, { httpOnly: true });
+
+            // Set session
+            req.session.user = user;
+
+            res.json({ login: true, token });
+        });
+    } catch (error) {
+        console.error("Server error:", error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// Protected route example
+app.get('/isUserAuth', verifyJWT, (req, res) => {
+    res.json({ auth: true, message: "You are authenticated!" });
+});
+
+// Logout route
+app.post('/logout', (req, res) => {
+    res.clearCookie('token');
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json({ message: "Logout failed" });
+        }
+        res.json({ logout: true });
+    });
+});
+
+
+app.use('/images', express.static('uploads'));
+
+// const db = mysql.createConnection({
+//     host:"localhost",
+//     user:"root",
+//     password:"",
+//     database:"cinemaa"
+// });
+
 app.use(express.json());
+app.use(cors({
+    origin: ["http://localhost:3000"],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials:true
+}));
 
 app.get('/', (req, res) => {
     if(req.session.name){
-        return res.json({valid: true, name: req.session.name})
+        return res.json({valid: true})
     } else{
         return res.json({valid: false})
     }
 })
+// const jwtSecret = 'your-secret-key';
 
-app.post("/login", (req, res) => {
-    const q = "SELECT * FROM user WHERE email = ? AND password = ?";
-    db.query(q, [req.body.email, req.body.password], (err, result) => {
-        if (err) return res.json("login failed, Error inside server(Error)");
-        if (result.length > 0) {
-            req.session.name = result[0].name;
-            return res.json({Login: true, name: req.session.name});
-        } else {
-            return res.json("No such data in the database");
-        }
-    });
-});
+// const verifyJWT = (req, res, next) => {
+//     const token = req.headers["x-access-token"]
+
+//     if(!token){
+//         res.send("we need a token, plssss")
+//     } else{
+//         jwt.verify(token, jwtSecret, (err, decoded) => {
+//             if(err){
+//                 res.json({auth: false, message:"u failed to authenticate"})
+//             } else{
+//                 req.userId = decoded.id;
+//                 next();
+//             }
+//         });
+//     }
+// };
+// app.get('/isUserAuth', verifyJWT,(req, res) => {
+//     res.send("u are authenticated, Congrats!")
+// })
+
+// app.post('/login', async (req, res) => {
+//     const { email, password } = req.body;
+
+//     try {
+//         const user = await User.findOne({ email });
+
+//         if (!user || !bcrypt.compareSync(password, user.password)) {
+//             return res.status(401).json({ message: 'Invalid email or password' });
+//         }
+
+//         // Generate JWT token or session
+//         const token = jwt.sign({ userId: user._id }, 'your_secret_key');
+//         res.json({ Login: true, token });
+
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ message: 'Server error' });
+//     }
+// });
+
+
+// const isAdmin = (req, res, next) => {
+//     if (req.session.role !== 'admin') {
+//         return res.status(403).json("Access denied");
+//     }
+//     next();
+// };
+
+// app.post("/someAdminRoute", isAdmin, (req, res) => {
+//     // Admin-specific logic
+// });
 
 //per users
 app.get("/users", (req,res) => {
@@ -70,19 +202,22 @@ app.get("/users", (req,res) => {
     });
 });
 
-app.post("/users", (req,res) => {
-    const q = "INSERT into user (`name`,`surname`,`email`,`password`) VALUES ( ?, ?, ?, ?)";
-    const values = [
-        req.body.name,
-        req.body.surname,
-        req.body.email,
-        req.body.password
-    ];
+app.post("/users", async (req, res) => {
+    const { name, surname, email, password } = req.body;
 
-    db.query(q, values, (err,data) => {
-        if(err) return res.json(err);
-        return res.json("user has been created successfully");
-    });
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const q = "INSERT into user (`name`,`surname`,`email`,`password`) VALUES ( ?, ?, ?, ?)";
+        const values = [name, surname, email, hashedPassword];
+
+        db.query(q, values, (err, data) => {
+            if (err) return res.json(err);
+            return res.json("User has been created successfully");
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
 });
 
 app.get("/users/:id", (req, res) => {
@@ -118,13 +253,19 @@ app.put("/users/:id", (req, res) => {
     });
 });
 
-app.delete("/users/:id", (req,res) => {
+app.delete("/users/:id", (req, res) => {
     const userId = req.params.id;
     const q = "DELETE FROM user WHERE id = ?";
-    
-    db.query(q, [userId], (err,data) => {
-        if(err) return res.json(err);
-        return res.json("User has been deleted successfully.");
+
+    db.query(q, [userId], (err, data) => {
+        if (err) {
+            console.error(err);  // Log the error for debugging
+            return res.status(500).json({ error: "An error occurred while deleting the user." });
+        }
+        if (data.affectedRows === 0) {
+            return res.status(404).json({ message: "User not found." });
+        }
+        return res.status(200).json({ message: "User has been deleted successfully." });
     });
 });
 
