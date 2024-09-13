@@ -67,7 +67,7 @@ main{
 }
 .delete{
     padding: 3px 6px;
-    background-color: rgba(250, 83, 83, 0.671);
+    background-color: #ff6473;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
@@ -76,7 +76,7 @@ main{
 }
 .update{
     padding: 3px 6px;
-    background-color: rgb(79, 240, 20);
+    background-color:#a3de83;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
@@ -160,7 +160,7 @@ textarea {
 .mb-3 label{
     color: rgb(70, 101, 126);
     font-weight: bold;
-    margin-left: 30%;
+    /* margin-left: 30%; */
 }
 
 /* Per MOVIES */
@@ -317,19 +317,36 @@ input:focus {
     border-color: deepskyblue; /* Optional: Change border color on focus */
   }
   
-.form {
+/* .form {
     background-color: #222;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+} */
 .lgn{
     align-items: center;
     margin-left: 40%;
 }
-.mb-3{
-margin-right: 80%;
+
+.ticket-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px; 
+    justify-content: center;
+    padding: 10px;
 }
-.mb-3 label{
-    margin-left: 47%;
+
+.ticket-item {
+    background-color: transparent;
+    border: #fff 0.3px solid;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 17%;
+}
+
+.ticket-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }

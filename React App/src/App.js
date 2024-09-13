@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom/client';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
@@ -12,6 +13,7 @@ import Signup from './pages/Signup.jsx';
 import Update from './pages/Update.jsx';
 import Category from './pages/Category.jsx';
 import UpdateCategory from './pages/UpdateCategory.jsx';
+import AddCategory from './pages/AddCategory.jsx';
 import AddMovie from './pages/AddMovie.jsx';
 import UpdateMovie from './pages/UpdateMovie.jsx';
 import AddEvent from './pages/AddEvent.jsx';
@@ -25,8 +27,9 @@ import AddHall from './pages/AddHall.jsx';
 import UpdateHall from './pages/UpdateHall.jsx';
 import AddTicket from './pages/AddTicket.jsx';
 import UpdateTicket from './pages/UpdateTicket.jsx';
-
-
+import Location from './pages/Location.jsx';
+import AddLocation from './pages/AddLocation.jsx';
+import UpdateLocation from './pages/UpdateLocation.jsx';
 
 const App = () => {
   return (
@@ -44,11 +47,12 @@ const App = () => {
           <Route path="/update/:id" element={<Update />} />
           <Route path="/category" element={<Category />} />
           <Route path="/updateCategory/:id" element={<UpdateCategory />} />
+          <Route path="/addcategory" element={<AddCategory />} />
           <Route path="/addmovie" element={<AddMovie />} />
           <Route path="/updatemovie/:id" element={<UpdateMovie />} />
           <Route path="/addevent" element={<AddEvent />} />
           <Route path="/updateevent/:id" element={<UpdateEvent />} />
-          <Route path="/Halls" element={<Halls />} />
+          <Route path="/halls" element={<Halls />} />
           <Route path="/announcments" element={<Announcments />} />
           <Route path="/login" element={<Login />} />
           <Route path="/addannouncment" element={<AddAnnouncment />} />
@@ -57,11 +61,21 @@ const App = () => {
           <Route path="/updatehall/:id" element={<UpdateHall />} />
           <Route path="/addticket" element={<AddTicket />} />
           <Route path="/updateticket/:id" element={<UpdateTicket />} />
-
+          <Route path="/location" element={<Location />} />
+          <Route path="/addlocation" element={<AddLocation />} />
+          <Route path="/updateLocation/:id" element={<UpdateLocation />} />
         </Routes>
       </Sidebar>
     </BrowserRouter>
   );
 };
+
+// Now, render the App component using createRoot
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+      <App />
+  </React.StrictMode>
+);
 
 export default App;
