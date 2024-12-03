@@ -30,6 +30,17 @@ import UpdateTicket from './pages/UpdateTicket.jsx';
 import Location from './pages/Location.jsx';
 import AddLocation from './pages/AddLocation.jsx';
 import UpdateLocation from './pages/UpdateLocation.jsx';
+import Logout from './pages/Logout.jsx';
+import AnnouncmentsU from './pages/AnnouncmentsU.jsx';
+import LocationU from './pages/LocationU.jsx';
+import EventsU from './pages/EventsU.jsx';
+import MoviesU from './pages/MoviesU.jsx';
+import Ligjeruesi from './pages/Ligjeruesi.jsx';
+import AddLigjeruesi from './pages/AddLigjeruesi.jsx';
+import UpdateLigjeruesi from './pages/UpdateLigjeruesi.jsx';
+import Ligjerata from './pages/Ligjerata.jsx';
+import AddLigjerata from './pages/AddLigjerata.jsx';
+import UpdateLigjerata from './pages/UpdateLigjerata.jsx';
 
 const App = () => {
   return (
@@ -51,10 +62,11 @@ const App = () => {
           <Route path="/addmovie" element={<AddMovie />} />
           <Route path="/updatemovie/:id" element={<UpdateMovie />} />
           <Route path="/addevent" element={<AddEvent />} />
-          <Route path="/updateevent/:id" element={<UpdateEvent />} />
+          <Route path="/updateEvent/:id" element={<UpdateEvent />} />
           <Route path="/halls" element={<Halls />} />
           <Route path="/announcments" element={<Announcments />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/addannouncment" element={<AddAnnouncment />} />
           <Route path="/updateannouncment/:id" element={<UpdateAnnouncment />} />
           <Route path="/addhall" element={<AddHall />} />
@@ -64,13 +76,22 @@ const App = () => {
           <Route path="/location" element={<Location />} />
           <Route path="/addlocation" element={<AddLocation />} />
           <Route path="/updateLocation/:id" element={<UpdateLocation />} />
+          <Route path="/announcmentsU" element={<AnnouncmentsU />} />
+          <Route path="/locationU" element={<LocationU />} />
+          <Route path="/eventsU" element={<EventsU />} />
+          <Route path="/moviesU" element={<MoviesU />} />
+          <Route path="/ligjeruesi" element={<Ligjeruesi />} />
+          <Route path="/AddLigjeruesi" element={<AddLigjeruesi />} />
+          <Route path="/UpdateLigjeruesi/:id" element={<UpdateLigjeruesi />} />
+          <Route path="/ligjerata" element={<Ligjerata />} />
+          <Route path="/AddLigjerata" element={<AddLigjerata />} />
+          <Route path="/UpdateLigjerata/:id" element={<UpdateLigjerata />} />
         </Routes>
       </Sidebar>
     </BrowserRouter>
   );
 };
 
-// Now, render the App component using createRoot
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
