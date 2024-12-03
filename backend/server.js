@@ -13,14 +13,14 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
 
-// Configure session middleware
+// Session
 app.use(session({
     secret: "your-session-secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: false, // Set to true if you're using HTTPS
-        maxAge: 1000 * 60 * 60 * 24, // 24 hours
+        secure: false,
+        maxAge: 1000 * 60 * 60 * 24, //24 ore
     }
 }));
 
@@ -39,11 +39,11 @@ const db = mysql.createConnection({
     database: "cinemaa"
 });
 
-const jwtSecret = 'your-secret-key'; // Change this to your secret key
+const jwtSecret = 'your-secret-key'; 
 
-// Middleware to verify JWT token
+// Tokeni
 const verifyJWT = (req, res, next) => {
-    const token = req.cookies.token; // Use cookies to store token
+    const token = req.cookies.token; 
 
     if (!token) {
         return res.status(403).json({ auth: false, message: "No token provided" });
@@ -59,20 +59,15 @@ const verifyJWT = (req, res, next) => {
     }
 };
 
-// Authentication route
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        // Query to fetch user by email
         const q = "SELECT * FROM user WHERE email = ?";
         db.query(q, [email], async (err, data) => {
             if (err) return res.status(500).json({ error: "Server error", details: err });
-
-            console.log("Database response:", data); // Debugging line
-
+            console.log("Database response:", data);
             const user = data[0];
-
             if (!user) {
                 return res.status(401).json({ message: 'Invalid email or password' });
             }
@@ -81,15 +76,12 @@ app.post('/login', async (req, res) => {
             if (!passwordMatches) {
                 return res.status(401).json({ message: 'Invalid email or password' });
             }
-
-            // Generate JWT token
             const token = jwt.sign({ userId: user.id }, jwtSecret, { expiresIn: '24h' });
 
-            // Set token in cookie
             res.cookie('token', token, { httpOnly: true });
 
-            // Set session
             req.session.user = user;
+            req.session.role = user.role;
 
             res.json({ login: true, token });
         });
@@ -99,12 +91,16 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// Protected route example
+// autorizimi
 app.get('/isUserAuth', verifyJWT, (req, res) => {
     res.json({ auth: true, message: "You are authenticated!" });
 });
 
-// Logout route
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+    return res.json("Success loging out");
+})
+
 app.post('/logout', (req, res) => {
     res.clearCookie('token');
     req.session.destroy((err) => {
@@ -115,15 +111,7 @@ app.post('/logout', (req, res) => {
     });
 });
 
-
 app.use('/images', express.static('uploads'));
-
-// const db = mysql.createConnection({
-//     host:"localhost",
-//     user:"root",
-//     password:"",
-//     database:"cinemaa"
-// });
 
 app.use(express.json());
 app.use(cors({
@@ -133,65 +121,12 @@ app.use(cors({
 }));
 
 app.get('/', (req, res) => {
-    if(req.session.name){
-        return res.json({valid: true})
+    if(req.session.role){
+        return res.json({valid: true, role: req.session.role})
     } else{
         return res.json({valid: false})
     }
 })
-// const jwtSecret = 'your-secret-key';
-
-// const verifyJWT = (req, res, next) => {
-//     const token = req.headers["x-access-token"]
-
-//     if(!token){
-//         res.send("we need a token, plssss")
-//     } else{
-//         jwt.verify(token, jwtSecret, (err, decoded) => {
-//             if(err){
-//                 res.json({auth: false, message:"u failed to authenticate"})
-//             } else{
-//                 req.userId = decoded.id;
-//                 next();
-//             }
-//         });
-//     }
-// };
-// app.get('/isUserAuth', verifyJWT,(req, res) => {
-//     res.send("u are authenticated, Congrats!")
-// })
-
-// app.post('/login', async (req, res) => {
-//     const { email, password } = req.body;
-
-//     try {
-//         const user = await User.findOne({ email });
-
-//         if (!user || !bcrypt.compareSync(password, user.password)) {
-//             return res.status(401).json({ message: 'Invalid email or password' });
-//         }
-
-//         // Generate JWT token or session
-//         const token = jwt.sign({ userId: user._id }, 'your_secret_key');
-//         res.json({ Login: true, token });
-
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ message: 'Server error' });
-//     }
-// });
-
-
-// const isAdmin = (req, res, next) => {
-//     if (req.session.role !== 'admin') {
-//         return res.status(403).json("Access denied");
-//     }
-//     next();
-// };
-
-// app.post("/someAdminRoute", isAdmin, (req, res) => {
-//     // Admin-specific logic
-// });
 
 //per users
 app.get("/users", (req,res) => {
@@ -237,13 +172,14 @@ app.get("/users/:id", (req, res) => {
 
 app.put("/users/:id", (req, res) => {
     const userId = req.params.id;
-    const q = "UPDATE user SET `name`=?, `surname`=?, `email`=?, `password`=? WHERE id=? ";
+    const q = "UPDATE user SET `name`=?, `surname`=?, `email`=?, `password`=?, `role`=? WHERE id=? ";
 
     const values = [
         req.body.name,
         req.body.surname,
         req.body.email,
         req.body.password,
+        req.body.role,
         userId
     ];
 
@@ -259,7 +195,7 @@ app.delete("/users/:id", (req, res) => {
 
     db.query(q, [userId], (err, data) => {
         if (err) {
-            console.error(err);  // Log the error for debugging
+            console.error(err);
             return res.status(500).json({ error: "An error occurred while deleting the user." });
         }
         if (data.affectedRows === 0) {
@@ -395,9 +331,6 @@ app.put("/Halls/:id", (req,res) => {
     });
 });
 
-
-//per MOVIES
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads')
@@ -418,7 +351,17 @@ app.use((err, req, res, next) => {
     next();
   });
 
+  //Per Movies
+
 app.get("/movies", (req,res) => {
+    const q = "SELECT * FROM movies";
+    db.query(q, (err,data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    });
+});
+
+app.get("/moviesU", (req,res) => {
     const q = "SELECT * FROM movies";
     db.query(q, (err,data) => {
         if(err) return res.json(err);
@@ -495,6 +438,14 @@ app.get("/events", (req,res) => {
     });
 });
 
+app.get("/eventsU", (req,res) => {
+    const q = "SELECT * FROM events";
+    db.query(q, (err,data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    });
+});
+
 app.post("/events", uploadM.single('foto'), (req, res) => {
     const q = "INSERT INTO events (`name`,`foto`, `date`, `endDate`) VALUES (?, ?, ?, ?)";
     const values = [
@@ -519,7 +470,22 @@ app.delete("/events/:id", (req,res) => {
     });
 });
 
+app.put("/Announcments/:id", (req, res) => {
+    const cid = req.params.id;
+    const q = "UPDATE Announcments SET `name`=?, `reason`=?, `date`=? WHERE id=? ";
 
+    const values = [
+        req.body.name,
+        req.body.reason,
+        req.body.date.split("T")[0],
+        cid
+    ];
+
+    db.query(q, values, (err, data) => {
+        if (err) return res.status(500).json({ error: "Error updating Announcment", details: err });
+        return res.json("Announcment has been updated successfully.");
+    });
+});
 app.put("/events/:id", (req, res) => {
     const cid = req.params.id;
     const { name, foto, date, endDate } = req.body;
@@ -558,6 +524,14 @@ app.get("/events/:id", (req, res) => {
 
 //Per Announcments
 app.get("/Announcments", (req,res) => {
+    const q = "SELECT * FROM Announcments";
+    db.query(q, (err,data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    });
+});
+
+app.get("/AnnouncmentsU", (req,res) => {
     const q = "SELECT * FROM Announcments";
     db.query(q, (err,data) => {
         if(err) return res.json(err);
@@ -640,8 +614,11 @@ app.post("/tickets", (req, res) => {
         req.body.movie_date
     ];
     db.query(q, values, (err, data) => {
-        if (err) return res.json(err);
-        return res.json("Ticket has been created successfully");
+        if (err) {
+            return res.json(err, "error while adding new ticket");
+        }else{
+            return res.json("Ticket has been created successfully")
+        }
     });
 });
 
@@ -703,6 +680,14 @@ app.get("/location", (req,res) => {
     });
 });
 
+app.get("/locationU", (req,res) => {
+    const q = "SELECT * FROM location";
+    db.query(q, (err,data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    });
+});
+
 app.post("/location", (req,res) => {
     const q = "INSERT into location (`name`) VALUES (?)";
     const values = [
@@ -754,7 +739,136 @@ app.put("/location/:id", (req,res) => {
         return res.json("location has been updated successfully.");
     });
 });
+//-----------------------------
+//per Ligjeruesin
+app.get("/ligjeruesi", (req,res) => {
+    const q = "SELECT * FROM ligjeruesi";
+    db.query(q, (err,data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    });
+});
 
+
+app.post("/ligjeruesi", (req,res) => {
+    const q = "INSERT into ligjeruesi (`name`, `dept`, `email`) VALUES (?, ?, ?)";
+    const values = [
+        req.body.name,
+        req.body.dept,
+        req.body.email,
+
+    ];
+    db.query(q, values,  (err, data) => {
+                if(err) return res.json(err);
+                return res.json("ligjeruesi has been created successfully");
+            });
+});
+
+app.delete("/ligjeruesi/:id", (req,res) => {
+    const Id = req.params.id;
+    const q = "DELETE FROM ligjeruesi WHERE id = ?";
+
+    db.query(q, [Id], (err,data) => {
+        if(err) return res.json(err);
+        return res.json("ligjeruesi has been deleted successfully.");
+    });
+});
+
+app.get("/ligjeruesi/:id", (req, res) => {
+    const Id = req.params.id;
+    const q = "SELECT * FROM `ligjeruesi` WHERE `id` = ?";
+
+    db.query(q, [Id], (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: "Error fetching ligjeruesi", details: err });
+        }
+        if (data.length === 0) {
+            return res.status(404).json({ error: "ligjeruesi not found::)" });
+        }
+        return res.json(data[0]);
+    });
+});
+
+app.put("/ligjeruesi/:id", (req,res) => {
+    const cid = req.params.id;
+    const q = "UPDATE ligjeruesi SET `name`=?, `dept`=?, `email`=? WHERE id=? ";
+
+    const values = [
+        req.body.name,
+        req.body.dept,
+        req.body.email,
+        cid
+    ];
+
+    db.query(q, values, (err,data) => {
+        if(err) return res.status(500).json({ error: "Error updating ligjeruesi", details: err });
+        return res.json("ligjeruesi has been updated successfully.");
+    });
+});
+//------------------------
+//per Ligjerata
+app.get("/ligjerata", (req,res) => {
+    const q = "SELECT * FROM ligjerata";
+    db.query(q, (err,data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    });
+});
+
+
+app.post("/ligjerata", (req,res) => {
+    const q = "INSERT into ligjerata (`name`, `prof_id`) VALUES (?, ?)";
+    const values = [
+        req.body.name,
+        req.body.prof_id,
+
+    ];
+    db.query(q, values,  (err, data) => {
+                if(err) return res.json(err);
+                return res.json("ligjerata has been created successfully");
+            });
+});
+
+app.delete("/ligjerata/:id", (req,res) => {
+    const Id = req.params.id;
+    const q = "DELETE FROM ligjerata WHERE id = ?";
+
+    db.query(q, [Id], (err,data) => {
+        if(err) return res.json(err);
+        return res.json("ligjerata has been deleted successfully.");
+    });
+});
+
+app.get("/ligjerata/:id", (req, res) => {
+    const Id = req.params.id;
+    const q = "SELECT * FROM `ligjerata` WHERE `id` = ?";
+
+    db.query(q, [Id], (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: "Error fetching ligjerata", details: err });
+        }
+        if (data.length === 0) {
+            return res.status(404).json({ error: "ligjerata not found::)" });
+        }
+        return res.json(data[0]);
+    });
+});
+
+app.put("/ligjerata/:id", (req,res) => {
+    const cid = req.params.id;
+    const q = "UPDATE ligjerata SET `name`=?, `prof_id`=? WHERE id=? ";
+
+    const values = [
+        req.body.name,
+        req.body.prof_id,
+        cid
+    ];
+
+    db.query(q, values, (err,data) => {
+        if(err) return res.status(500).json({ error: "Error updating ligjerata", details: err });
+        return res.json("ligjerata has been updated successfully.");
+    });
+});
 app.listen(3002, () => {
     console.log("connected to backend!");
 });
