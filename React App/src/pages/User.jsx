@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -28,23 +27,14 @@ const Users = () => {
     try {
       const confirmDelete = window.confirm("Are you sure you want to delete this user? This action cannot be undone.");
       if (confirmDelete) {
-        // Optional: Show a loading state
-        // setLoading(true);
-
         await axios.delete("http://localhost:3002/users/" + id);
-
-        // Update state to remove the deleted user
         setUsers((prevUsers) => prevUsers.filter(user => user.id !== id));
-
-        // Optional: Show a success message
         alert("User has been deleted successfully.");
       }
     } catch (err) {
       console.error(err);
-      // Optional: Show an error message to the user
       alert("An error occurred while deleting the user.");
     } finally {
-      // Optional: Hide the loading state
       // setLoading(false);
     }
   };
@@ -62,6 +52,7 @@ const Users = () => {
           <th style={{ padding: '10px 15px' }}>Surname</th>
           <th style={{ padding: '10px 15px' }}>Email</th>
           <th style={{ padding: '10px 15px' }}>Password</th>
+          <th style={{ padding: '10px 15px' }}>Role</th>
           <th style={{ padding: '10px 15px' }}>Update</th>
           <th style={{ padding: '10px 15px' }}>Delete</th>
         </tr>
@@ -74,6 +65,7 @@ const Users = () => {
             <td style={{ padding: '12px' }}>{user.surname}</td>
             <td style={{ padding: '12px' }}>{user.email}</td>
             <td style={{ padding: '12px' }}>{user.password}</td>
+            <td style={{ padding: '12px' }}>{user.role}</td>
             <td className='update'>
               <Link to={`/update/${user.id}`} style={{ color: "white", textDecoration: 'none', fontWeight: 'bold' }}>🔄 Update</Link>
             </td>

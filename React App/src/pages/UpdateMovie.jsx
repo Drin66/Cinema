@@ -4,7 +4,7 @@ import axios from "axios";
 
 const UpdateMovie = () => {
   const [movie, setMovie] = useState(null);
-  const [categories, setCategories] = useState([]); // State to hold categories
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
   const id = location.pathname.split("/")[2];
@@ -23,7 +23,7 @@ const UpdateMovie = () => {
   
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("http://localhost:3002/categories"); // Adjust the URL if necessary
+        const response = await axios.get("http://localhost:3002/categories");
         setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);

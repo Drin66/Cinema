@@ -40,12 +40,12 @@ const Events = () => {
             <h4 className="movie-title">{new Date(event.date).toLocaleDateString('en-GB')} - {new Date(event.endDate).toLocaleDateString('en-GB')}</h4>
             <div className="buttons">
               <button className="delete-product" onClick={() => handleDelete(event.id)} style={{marginLeft:'10%'}}>🗑️</button>
-              <button className='update-product'><Link to={`/updateevent/${event.id}`}>🔄</Link></button>
+              <button className='update-product'><Link to={`/updateEvent/${event.id}`}>🔄</Link></button>
             </div>
           </div>
         ))}
       </div>
-      {/* <button className='users-button' style={{marginLeft:'45%'}}><Link to="/addevent" style={{color:"#fff"}}>➕Add a new Event</Link></button><br /><br /><br /> */}
+      
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
   <button className='users-button' style={{ 
     padding: '12px 24px', 

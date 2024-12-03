@@ -45,11 +45,30 @@ const TicketList = () => {
               <button className='update-movie'><Link to={`/updateticket/${ticket.id}`}>🔄</Link></button>
             </div>
           </div>
-        ))}2024-09-22 19:45:00
+        ))}
       </div>
       <br /><br />
 
-      <button className='users-button' style={{marginLeft:'43%'}}><Link to="/addticket" style={{color:"#fff"}}>➕Add a new Ticket</Link></button><br /><br /><br />
+
+      {/* <button className='users-button' 
+      style={{
+        padding: "12px 24px",
+        backgroundColor: "#3baea0", 
+        color: "#fff",
+        borderRadius: "8px", 
+        border: "none",
+        fontSize: "16px",
+        cursor: "pointer",
+        transition: "background-color 0.3s ease, transform 0.3s ease",
+        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+        marginLeft:"750px"
+        
+        
+        }}>
+        <Link to="/addticket" style={{color:"#fff"}}>➕Add a new Ticket</Link></button><br /><br /><br /> */}
+    
+    
+    
     </div>
   );
 };

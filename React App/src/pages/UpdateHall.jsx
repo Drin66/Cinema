@@ -4,7 +4,7 @@ import axios from "axios";
 
 const UpdateHall = () => {
   const [hall, setHall] = useState(null);
-  const [movies, setMovies] = useState([]); // State to hold movies
+  const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
   const id = location.pathname.split("/")[2];

@@ -52,11 +52,6 @@ const Movies = () => {
           </div>
         ))}
       </div>
-      {/* <button className='users-button' style={{marginLeft:'45%'}}><Link to="/addmovie" style={{color:"#fff"}}>➕Add a new Movie</Link></button><br /><br /><br />
-      <button className='users-button' style={{marginLeft:'43.5%', backgroundColor:"rgba(4, 105, 135)", border:"#fff"}}><Link to="/Halls" style={{color:"#fff"}}>💺See Movie Halls</Link></button>
-      <button className='users-button' style={{marginLeft:'43.5%', backgroundColor:"rgba(4, 105, 135)", border:"#fff"}}><Link to="/category" style={{color:"#fff"}}>🔠See Movie Categories</Link></button> */}
-    
-    
     <div style={{ textAlign: 'center', marginTop: '20px' }}>
   <button 
     className='users-button' 

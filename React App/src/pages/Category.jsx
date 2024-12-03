@@ -54,9 +54,7 @@ const Category = () => {
               <tr key={category.id} style={{ backgroundColor: '#761a1a', color: '#fff' }}>
               <td style={{ padding: '1rem' }}>{category.id}</td>
               <td style={{ padding: '1rem' }}>{category.name}</td>
-              <td style={{ textAlign: 'center' }}>
-                <Link to={`/updatecategory/${category.id}`} style={{ color: 'turqoise', textDecoration: 'none' }}>🔄 Update</Link>
-              </td>
+              <td style={{ textAlign: 'center' }}><Link to={`/updatecategory/${category.id}`} style={{ color: 'turqoise', textDecoration: 'none' }}>🔄 Update</Link></td>
               <td style={{ textAlign: 'center', cursor: 'pointer', color: '#dc3545' }} onClick={() => handleDelete(category.id)}>
                 ✖️ Delete
               </td>

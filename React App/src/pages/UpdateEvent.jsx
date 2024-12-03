@@ -55,45 +55,45 @@ const UpdateEvent = () => {
     return <div>Loading...</div>;
   }
 
-  // return (
-    // <div className="form">
-    //   <h1 className="h1-design">Update the Event</h1><br />
-    //   <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='name'>Name:</label>
-    //   <input
-    //     type="text"
-    //     placeholder="Product name"
-    //     name="name"
-    //     value={event.name}
-    //     onChange={handleChange}
-    //   /><br /><br />
-    //   <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='foto'>Image:</label>
-    //   <input
-    //     type="text"
-    //     placeholder="Event image URL"
-    //     name="foto"
-    //     value={event.foto}
-    //     onChange={handleChange}
-    //   /><br /><br />
-    //   <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='date'>Start Date:</label>
-    //   <input
-    //     type="date"
-    //     placeholder="date"
-    //     name="date"
-    //     value={event.date}
-    //     onChange={handleChange}
-    //   /><br /><br />
-    //   <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='date'>End Date:</label>
-    //   <input
-    //     type="date"
-    //     placeholder="date"
-    //     name="endDate"
-    //     value={event.endDate}
-    //     onChange={handleChange}
-    //   /><br /><br />
-    //   <button className="signupbutton" onClick={handleClick} style={{color:"#fff"}}>Update</button><br/>
-    //   <Link to="/events">Back to Events</Link>
-    // </div>
-  // );
+  return (
+    <div className="form">
+      <h1 className="h1-design">Update the Event</h1><br />
+      <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='name'>Name:</label>
+      <input
+        type="text"
+        placeholder="Product name"
+        name="name"
+        value={event.name}
+        onChange={handleChange}
+      /><br /><br />
+      <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='foto'>Image:</label>
+      <input
+        type="text"
+        placeholder="Event image URL"
+        name="foto"
+        value={event.foto}
+        onChange={handleChange}
+      /><br /><br />
+      <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='date'>Start Date:</label>
+      <input
+        type="date"
+        placeholder="date"
+        name="date"
+        value={event.date}
+        onChange={handleChange}
+      /><br /><br />
+      <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='date'>End Date:</label>
+      <input
+        type="date"
+        placeholder="date"
+        name="endDate"
+        value={event.endDate}
+        onChange={handleChange}
+      /><br /><br />
+      <button className="signupbutton" onClick={handleClick} style={{color:"#fff"}}>Update</button><br/>
+      <Link to="/events">Back to Events</Link>
+    </div>
+  );
 };
 
 export default UpdateEvent;

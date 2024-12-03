@@ -52,8 +52,6 @@ const Announcments = () => {
       backgroundColor: '#fff', 
       border: '1px solid #ddd',
       boxShadow: '0 0 10px rgba(0,0,0,0.1)', 
-      // borderRadius:'20%',
-      // border: '2px'
     }}>
       <thead>
         <tr style={{ 

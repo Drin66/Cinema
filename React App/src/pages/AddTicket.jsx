@@ -70,24 +70,12 @@ const AddTicket = () => {
     }
   };
 
-  // const handleClick = async (e) => {
-  //   e.preventDefault();
-  //   console.log("Ticket data being sent:", ticket);
-  //   try {
-  //     await axios.post("http://localhost:3002/tickets", ticket);
-  //     navigate("/ticketsList");
-  //   } catch (err) {
-  //     console.error("Error adding ticket:", err.response ? err.response.data : err.message);
-  //     setError(true);
-  //   }
-  // };
   const handleClick = async (e) => {
     e.preventDefault();
     console.log("Ticket data being sent:", ticket);
   
-    // Convert date to YYYY-MM-DD HH:MM:SS format
     const formattedDate = ticket.date
-      ? new Date(ticket.date).toISOString().slice(0, 19).replace('T', ' ') // Convert to YYYY-MM-DD HH:MM:SS
+      ? new Date(ticket.date).toISOString().slice(0, 19).replace('T', ' ') 
       : '';
   
     const updatedTicket = {
@@ -106,72 +94,185 @@ const AddTicket = () => {
     }
   };
   
-  
-    
-
   return (
-    <div className="form" style={{ backgroundColor: "transparent"}}>
-      <h1 className="h1-prod">Book New Ticket</h1><br/>
+    <div
+  className="form"
+  style={{
+    backgroundColor: "rgba(0, 0, 0, 0.4)", // Subtle dark background
+    padding: "30px", 
+    borderRadius: "10px", 
+    width: "100%", 
+    maxWidth: "400px", 
+    margin: "0 auto", // Center the form
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.5)"
+  }}
+>
+  <h1 className="h1-prod" style={{ textAlign: "center", color: "#fff", marginBottom: "20px" }}>
+    Book New Ticket
+  </h1>
 
-      <label style={{fontWeight: 'bold'}} htmlFor='user_name'>User:</label>
-      <select
-        name="user_id"
-        onChange={handleUserChange}
-        className="dropdown-style"
-      >
-        <option value="">Select a user</option>
-        {users.map((user) => (
-          <option key={user.id} value={user.id}>
-            {user.name} {user.surname}
-          </option>
-        ))}
-      </select>
-      <br/><br/>
+  <label
+    style={{
+      fontWeight: 'bold',
+      color: '#fff',
+      display: 'block',
+      marginBottom: '10px'
+    }}
+    htmlFor="user_name"
+  >
+    User:
+  </label>
+  <select
+    name="user_id"
+    onChange={handleUserChange}
+    className="dropdown-style"
+    style={{
+      width: "100%",
+      padding: "10px",
+      marginBottom: "20px",
+      borderRadius: "5px",
+      border: "1px solid #ccc",
+      fontSize: "16px"
+    }}
+  >
+    <option value="">Select a user</option>
+    {users.map((user) => (
+      <option key={user.id} value={user.id}>
+        {user.name} {user.surname}
+      </option>
+    ))}
+  </select>
 
-      <label style={{fontWeight: 'bold'}} htmlFor='movie_emri'>Movie:</label>
-      <select
-        name="movie_emri"
-        onChange={handleMovieChange}
-        value={ticket.movie_emri}
-        className="dropdown-style"
-      >
-        <option value="">Select a movie</option>
-        {movies.map((movie) => (
-          <option key={movie.id} value={movie.emri}>
-            {movie.emri}
-          </option>
-        ))}
-      </select>
-      <br/><br/>
-      
-      <label style={{fontWeight: 'bold'}} htmlFor='hall_name'>Hall:</label>
-      <select
-        name="hall_name"
-        onChange={handleChange}
-        value={ticket.hall_name}
-        className="dropdown-style"
-      >
-        <option value="">Select a hall</option>
-        {halls.map((hall) => (
-          <option key={hall.id} value={hall.name}>
-            {hall.name}
-          </option>
-        ))}
-      </select>
-      <br/><br/>
+  <label
+    style={{
+      fontWeight: 'bold',
+      color: '#fff',
+      display: 'block',
+      marginBottom: '10px'
+    }}
+    htmlFor="movie_emri"
+  >
+    Movie:
+  </label>
+  <select
+    name="movie_emri"
+    onChange={handleMovieChange}
+    value={ticket.movie_emri}
+    className="dropdown-style"
+    style={{
+      width: "100%",
+      padding: "10px",
+      marginBottom: "20px",
+      borderRadius: "5px",
+      border: "1px solid #ccc",
+      fontSize: "16px"
+    }}
+  >
+    <option value="">Select a movie</option>
+    {movies.map((movie) => (
+      <option key={movie.id} value={movie.emri}>
+        {movie.emri}
+      </option>
+    ))}
+  </select>
 
-      <label style={{fontWeight: 'bold'}} htmlFor='date'>Date:</label>
-      <input
-        type="datetime-local"
-        name="date"
-        value={ticket.date ? ticket.date.substring(0, 16) : ''}
-        onChange={handleChange}
-      /><br/><br/>
-      
-      <button className="signupbutton" onClick={handleClick}>Add</button><br/>
-      {error && "Something went wrong!"}
-      <Link to="/ticketsList" style={{ color: "white"}}>Back to Tickets</Link>
-    </div>
+  <label
+    style={{
+      fontWeight: 'bold',
+      color: '#fff',
+      display: 'block',
+      marginBottom: '10px'
+    }}
+    htmlFor="hall_name"
+  >
+    Hall:
+  </label>
+  <select
+    name="hall_name"
+    onChange={handleChange}
+    value={ticket.hall_name}
+    className="dropdown-style"
+    style={{
+      width: "100%",
+      padding: "10px",
+      marginBottom: "20px",
+      borderRadius: "5px",
+      border: "1px solid #ccc",
+      fontSize: "16px"
+    }}
+  >
+    <option value="">Select a hall</option>
+    {halls.map((hall) => (
+      <option key={hall.id} value={hall.name}>
+        {hall.name}
+      </option>
+    ))}
+  </select>
+
+  <label
+    style={{
+      fontWeight: 'bold',
+      color: '#fff',
+      display: 'block',
+      marginBottom: '10px'
+    }}
+    htmlFor="date"
+  >
+    Date:
+  </label>
+  <input
+    type="datetime-local"
+    name="date"
+    value={ticket.date ? ticket.date.substring(0, 16) : ''}
+    onChange={handleChange}
+    style={{
+      width: "100%",
+      padding: "10px",
+      marginBottom: "20px",
+      borderRadius: "5px",
+      border: "1px solid #ccc",
+      fontSize: "16px"
+    }}
+  />
+
+  <button
+    className="signupbutton"
+    onClick={handleClick}
+    style={{
+      width: "100%",
+      padding: "10px",
+      backgroundColor: "#79c2d0",
+      color: "#fff",
+      borderRadius: "5px",
+      border: "none",
+      cursor: "pointer",
+      fontSize: "16px",
+      transition: "background-color 0.3s"
+    }}
+    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0056b3'}
+    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#007BFF'}
+  >
+    Add
+  </button>
+
+  {error && <p style={{ color: "#e46161", textAlign: "center", marginTop: "10px" }}>Something went wrong!</p>}
+
+  <Link
+    to="/ticketsList"
+    style={{
+      display: "block",
+      textAlign: "center",
+      marginTop: "15px",
+      color: "#fff",
+      textDecoration: "none"
+    }}
+    onMouseOver={(e) => e.currentTarget.style.textDecoration = 'underline'}
+    onMouseOut={(e) => e.currentTarget.style.textDecoration = 'none'}
+  >
+    Back to Tickets
+  </Link>
+</div>
+
   );
 };
 

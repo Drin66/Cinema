@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -23,7 +23,7 @@ export default function Login() {
         event.preventDefault();
         axios.post('http://localhost:3002/login', { email, password })
             .then(res => {
-                if (res.data.Login) {
+                if (res.data.login) {
                     navigate('/');
                     console.log("Congrats, you are logged in");
                 } else {
@@ -39,8 +39,9 @@ export default function Login() {
 
     return (
         <div className="login-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh'}}>
-        <div className="login-form" style={{backgroundColor:'#97cba9', padding: '2rem', borderRadius: '8px', border: '1px solid #ddd', width: '100%', maxWidth: '400px' }}>
-          <h1 className="h1-design" style={{ textAlign: 'center', marginBottom: '2rem', color:'#97cba9', backgroundColor:'#118a7e'}}>Log In Below</h1>
+        <br/>
+        <div className="login-form" style={{backgroundColor:'#8a0f0f', padding: '2rem', borderRadius: '8px', border: '1px solid #ddd', width: '100%', maxWidth: '400px' }}>
+          <h1 className="h1-design" style={{ textAlign: 'center', marginBottom: '2rem', color:'#97cba9', backgroundColor:'##3c1b1f'}}>Log In Below</h1>
           
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -51,7 +52,7 @@ export default function Login() {
                 placeholder="Enter Email"
                 className="form-control"
                 onChange={e => setEmail(e.target.value)}
-                style={{backgroundColor:'white', width: '100%', padding: '0.75rem', borderRadius: '4px', border: '1px solid #ddd' }}
+                style={{backgroundColor:'white', color:"#000" , width: '100%', padding: '0.75rem', borderRadius: '4px', border: '1px solid #ddd' }}
               />
             </div>
             
@@ -63,18 +64,18 @@ export default function Login() {
                 placeholder="Enter Password"
                 className="form-control"
                 onChange={e => setPassword(e.target.value)}
-                style={{backgroundColor:'white', width: '100%', padding: '0.75rem', borderRadius: '4px', border: '1px solid #ddd' }}
+                style={{backgroundColor:'white', color:"#000" , width: '100%', padding: '0.75rem', borderRadius: '4px', border: '1px solid #ddd' }}
               />
             </div>
             
             <button
               type="submit"
               className="login-button"
-              style={{ display: 'block', width: '100%', padding: '0.75rem', borderRadius: '4px', border: 'none', backgroundColor: '#118a7e', color: '#fff', fontSize: '1rem', cursor: 'pointer', marginTop: '1.5rem' }}
-            >
+              style={{ display: 'block', width: '100%', padding: '0.75rem', borderRadius: '4px', border: 'none', backgroundColor: '#118a7e', color: '#fff', fontSize: '1rem', cursor: 'pointer', marginTop: '1.5rem' }}>
               Login
             </button>
-          </form>
+          </form><br/><br/>
+          <p style={{marginLeft:"18%"}}>Don't have an account? ➜ <button className='users-button' style={{backgroundColor: '#118a7a'}}><Link to="/Signup" style={{ color: "#000", textDecoration: 'none' }}>Sign Up</Link></button></p>
         </div>
       </div>
     );

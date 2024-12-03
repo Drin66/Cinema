@@ -37,10 +37,10 @@ const Location = () => {
 
   return (
     <div style={{ padding: '1%', marginLeft:'5px' }}>
-    <h1 className="h1-design" style={{textAlign: 'center', fontSize: '24px', color: 'white', marginBottom: '20px', marginLeft: '35%' }}>Location Dashboard</h1>
+    <h1 className="h1-design" style={{textAlign: 'center', fontSize: '24px', color: 'white', marginBottom: '20px', marginLeft: '43%' }}>Location Dashboard</h1>
     
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <table style={{ width: '80%', borderCollapse: 'collapse', fontSize: '16px', fontFamily: 'Arial, sans-serif', backgroundColor: '#761a1a', border: '1px solid #ddd', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+      <table style={{ width: '55%', borderCollapse: 'collapse', fontSize: '16px', fontFamily: 'Arial, sans-serif', backgroundColor: '#761a1a', border: '1px solid #ddd', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
         <thead>
           <tr style={{  backgroundColor: '#20615b', 
           color: '#fff', 
@@ -53,7 +53,7 @@ const Location = () => {
         <tbody>
           {location.map(loc => (
             <tr key={loc.id} style={{ borderBottom: '1px solid #ddd' }}>
-              <td style={{ padding: '1rem' }}>{loc.name}</td>
+              <td style={{ padding: '1rem', paddingLeft:"15%" }}>{loc.name}</td>
               <td style={{ textAlign: 'center' }}>
                 <Link to={`/updatelocation/${loc.id}`} style={{ color: '#007bff', textDecoration: 'none' }}>🔄 Update</Link>
               </td>

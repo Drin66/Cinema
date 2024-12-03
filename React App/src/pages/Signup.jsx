@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import '~bootstrap/scss/bootstrap';
-
 
 const Signup = () => {
   const [user, setUser] = useState({
@@ -15,9 +12,25 @@ const Signup = () => {
 
   const navigate = useNavigate()
 
-  const handleChange = (e) =>{
-    setUser(prev=>({...prev, [e.target.name]: e.target.value}));
+  const handleChange = (e) => {
+    setUser(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
   };
+  
+  useEffect(() => {
+    axios.get('http://localhost:3002')
+        .then(res => {
+            if (res.data.valid) {
+                navigate('/');
+            } else {
+                navigate('/Signup');
+            }
+        })
+        .catch(err => console.log(err));
+}, [navigate]);
+
   const handleClick = async e => {
     e.preventDefault();
     try {
@@ -28,17 +41,6 @@ const Signup = () => {
       console.error("Error creating user:", err);
     }
   };
-  
-
-  // const handleClick = async e =>{
-  //   e.preventDefault()
-  //   try{
-  //     await axios.post("http://localhost:3003/users", user)
-  //     navigate("/")
-  //   }catch(err){
-  //     console.log(err)
-  //   }
-  // }
 
   console.log(user);
   return (

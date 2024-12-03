@@ -9,15 +9,15 @@ const AddMovie = () => {
     category: "",
   });
   
-  const [categories, setCategories] = useState([]); // Add state to hold categories
+  const [categories, setCategories] = useState([]); 
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("http://localhost:3002/categories"); // Adjust the URL if necessary
-        setCategories(response.data); // Assuming response.data is an array of categories
+        const response = await axios.get("http://localhost:3002/categories");
+        setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -40,7 +40,7 @@ const AddMovie = () => {
         const formData = new FormData();
         formData.append('emri', movie.emri);
         formData.append('foto', movie.foto); 
-        formData.append('category', movie.category); // This was incorrectly using 'foto' instead of 'category'
+        formData.append('category', movie.category);
         
         await axios.post("http://localhost:3002/movies", formData);
         navigate("/movies");
@@ -51,46 +51,6 @@ const AddMovie = () => {
   };
 
   return (
-//     <div className="form" style={{ backgroundColor: "transparent"}}>
-//       <h1 className="h1-prod">Add New Movie</h1><br/>
-      
-//       <label style={{fontWeight: 'bold'}} htmlFor='emri'>Name:</label>
-//       <input
-//         type="text"
-//         placeholder="Movie name"
-//         name="emri"
-//         onChange={handleChange}
-//       /><br/><br/>
-      
-//       <label style={{fontWeight: 'bold'}} htmlFor='category'>Category:</label>
-//       <select
-//         name="category"
-//         onChange={handleChange}
-//         value={movie.category}
-//         className="dropdown-style"
-//       >
-//         <option value="">Select a category</option>
-//         {categories.map((category) => (
-//           <option key={category.id} value={category.name}>
-//             {category.name}
-//           </option>
-//         ))}
-//       </select>
-//       <br/><br/>
-
-// <label style={{color: 'rgb(70, 101, 126)', fontWeight: 'bold'}} htmlFor='date'>Movie Time:</label>
-// <input
-//   type="datetime-local"
-//   name="date"
-//   value={movie.date ? new Date(movie.date).toISOString().slice(0, 16) : ''}
-//   onChange={handleChange}
-// /><br /><br />
-
-      
-//       <button className="signupbutton" onClick={handleClick}>Add</button><br/>
-//       {error && "Something went wrong!"}
-//       <Link to="/movies" style={{ color: "white"}}>Back to Movies</Link>
-//     </div> 
 <div className="form" style={{  backgroundColor: 'transparent', padding: '10px 20px', borderRadius: '8px', border: '2px solid #fff', maxWidth: '500px', margin: '0 auto'  }}>
   <h1 className="h1-prod" style={{background:'#20615b', padding: '7px',textAlign: 'center', fontSize: '24px', color: 'white',  marginBottom: '20px', border: '3px solid white', borderRadius: '8px' }}>Add New Movie</h1>
   

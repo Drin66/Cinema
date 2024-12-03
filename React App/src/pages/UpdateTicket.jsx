@@ -72,7 +72,6 @@ const UpdateTicket = () => {
     return <div>Loading...</div>;
   }
 
-  // Format the date in the local timezone, keeping both date and time intact
   const formatDate = (date) => {
     const d = new Date(date);
     const pad = (n) => n < 10 ? '0' + n : n;
